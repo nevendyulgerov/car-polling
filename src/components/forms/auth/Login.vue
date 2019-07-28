@@ -1,16 +1,17 @@
 <template>
   <div
     data-component-group="auth-form"
-    data-component="login-form"
+    data-component="login"
   >
     <Form title="Login">
       <v-text-field
-        v-model="username"
-        label="Username"
+        v-model="email"
+        label="Email"
         required
+        type="email"
         :autofocus="true"
-        :error-messages="usernameErrors"
-        @blur="$v.username.$touch()"
+        :error-messages="emailErrors"
+        @blur="$v.email.$touch()"
       />
 
       <v-text-field
@@ -27,8 +28,8 @@
 
       <div class="form-actions">
         <v-btn
-          flat
-          class="trigger login"
+          class="trigger login elevation-4"
+          color="primary"
           :loading="isLoading"
           @click="submit"
         >
@@ -44,7 +45,7 @@
 
 <script>
   import { validationMixin } from 'vuelidate';
-  import { required } from 'vuelidate/lib/validators';
+  import { required, email } from 'vuelidate/lib/validators';
   import Form from '../Form';
 
   export default {
@@ -53,8 +54,9 @@
     },
     mixins: [validationMixin],
     validations: {
-      username: {
-        required
+      email: {
+        required,
+        email
       },
       password: {
         required
@@ -62,7 +64,7 @@
     },
     data() {
       return {
-        username: '',
+        email: '',
         password: '',
         isPasswordVisible: false,
         isSubmitted: false,
@@ -70,13 +72,16 @@
       };
     },
     computed: {
-      usernameErrors() {
+      emailErrors() {
         const errors = [];
-        if (!this.$v.username.$dirty) {
+        if (!this.$v.email.$dirty) {
           return errors;
         }
-        if (!this.$v.username.required) {
-          errors.push('Username is required');
+        if (!this.$v.email.required) {
+          errors.push('Email is required');
+        }
+        if (!this.$v.email.email) {
+          errors.push('Must be valid email');
         }
         return errors;
       },
@@ -103,13 +108,13 @@
       },
       clear() {
         this.$v.$reset();
-        this.username = '';
+        this.email = '';
         this.password = '';
         this.isSubmitted = false;
       },
       login() {
         const userAuth = {
-          username: this.username,
+          email: this.email,
           password: this.password,
         };
 
@@ -126,7 +131,7 @@
           });
       },
       canSubmitRequest() {
-        return this.username !== ''
+        return this.email !== ''
           && this.password !== ''
           && !this.isSubmitted;
       }
@@ -138,23 +143,8 @@
   @import '../../../assets/stylus/theme.styl';
 
   [data-component-group="auth-form"] {
-    &[data-component="login-form"] {
+    &[data-component="login"] {
       width: 100%;
-
-      .trigger.go-to-reset-pass {
-        color: $colors.shades.black;
-        background-color: transparent;
-        margin-right: $spacing-sm;
-        text-transform: none;
-
-        &:before {
-          background-color: transparent !important;
-        }
-      }
-
-      .trigger.login {
-        background-color: $colors.grey.darken-3;
-      }
     }
   }
 </style>

@@ -53,10 +53,10 @@
           color="primary"
           @click="submit"
         >
-          {{ 'Register' }}
           <v-icon>
-            input
+            account_circle
           </v-icon>
+          {{ 'Register' }}
         </v-btn>
       </div>
     </Form>
@@ -235,14 +235,6 @@
   [data-component-group="auth-form"] {
     &[data-component="register"] {
       width: 100%;
-
-      .form-actions {
-        .trigger.register {
-          .v-icon {
-            margin: 0 0 0 6px;
-          }
-        }
-      }
     }
   }
 </style>
