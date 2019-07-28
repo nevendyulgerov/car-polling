@@ -3,7 +3,7 @@ import adminPermissions from './data/adminPermissions';
 import timeout from './data/timeout';
 
 export default {
-  login(auth) {
+  login() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -26,7 +26,7 @@ export default {
       }, timeout);
     });
   },
-  register(user) {
+  register() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({

@@ -7,6 +7,9 @@
       :height="height"
       :position="position"
     />
+    <span class="app-name">
+      {{ 'Carpooling' }}
+    </span>
   </div>
 </template>
 
@@ -35,5 +38,13 @@
 <style lang="stylus" scoped>
   [data-component="logo"] {
     width: 174px;
+    text-align: center;
+
+    .app-name {
+      display: block;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 8px 0 0 0;
+    }
   }
 </style>

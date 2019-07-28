@@ -1,7 +1,7 @@
 export default {
   auth: {
-    authorization: 'dasd',
-    role: 'dasd'
+    authorization: '',
+    role: ''
   },
   users: {
     activeItem: {},

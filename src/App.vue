@@ -23,17 +23,8 @@
         permissions: []
       };
     },
-    created() {
-      this.updateAbility();
-    },
-    methods: {
-      updateAbility() {
-        this.permissions = this.$store.getters['auth/permissions'];
-        this.$ability.update(this.permissions);
-      }
-    },
     metaInfo() {
-      const title = 'Beer Tag';
+      const title = 'Car Pooling';
 
       return {
         title,

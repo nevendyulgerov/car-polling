@@ -54,6 +54,7 @@
 
     .trigger.go-to-home {
       margin: 0 auto;
+      text-decoration: none;
     }
   }
 </style>

@@ -3,7 +3,7 @@
     <layout-auth-frame :has-aside="false">
       <template slot="content">
         <v-layout class="form-wrapper normal">
-          <UserProfileForm :on-submit="registerUser" />
+          <Register :on-submit="registerUser" />
         </v-layout>
       </template>
     </layout-auth-frame>
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-  import UserProfileForm from '../../components/forms/auth/UserProfile';
+  import Register from '../../components/forms/auth/Register';
 
   export default {
     components: {
-      UserProfileForm
+      Register
     },
     data() {
       return {

@@ -1,16 +1,15 @@
 <template>
   <div
     data-component-group="auth-form"
-    data-component="user-profile"
+    data-component="register"
   >
     <Form title="Register">
       <v-text-field
-        v-model="username"
-        label="Username"
+        v-model="email"
+        label="Email"
         required
-        :autofocus="true"
-        :error-messages="usernameErrors"
-        @blur="$v.username.$touch()"
+        :error-messages="emailErrors"
+        @blur="$v.email.$touch()"
       />
 
       <v-text-field
@@ -30,11 +29,11 @@
       />
 
       <v-text-field
-        v-model="email"
-        label="Email"
+        v-model="phone"
+        label="Phone"
         required
-        :error-messages="emailErrors"
-        @blur="$v.email.$touch()"
+        :error-messages="phoneErrors"
+        @blur="$v.phone.$touch()"
       />
 
       <v-text-field
@@ -50,13 +49,13 @@
 
       <div class="form-actions">
         <v-btn
-          flat
-          class="trigger register"
+          class="trigger register elevation-4"
+          color="primary"
           @click="submit"
         >
           {{ 'Register' }}
           <v-icon>
-            chevron_right
+            input
           </v-icon>
         </v-btn>
       </div>
@@ -78,8 +77,9 @@
     },
     mixins: [validationMixin],
     validations: {
-      username: {
-        required
+      email: {
+        required,
+        email
       },
       firstName: {
         required
@@ -87,9 +87,8 @@
       lastName: {
         required
       },
-      email: {
-        required,
-        email
+      phone: {
+        required
       },
       password: {
         required,
@@ -107,10 +106,10 @@
     },
     data() {
       return {
-        username: '',
+        email: '',
         firstName: '',
         lastName: '',
-        email: '',
+        phone: '',
         password: '',
         isSubmitted: false,
         isLoading: false,
@@ -118,13 +117,16 @@
       };
     },
     computed: {
-      usernameErrors() {
+      emailErrors() {
         const errors = [];
-        if (!this.$v.username.$dirty) {
+        if (!this.$v.email.$dirty) {
           return errors;
         }
-        if (!this.$v.username.required) {
-          errors.push('Username is required');
+        if (!this.$v.email.required) {
+          errors.push('Email is required');
+        }
+        if (!this.$v.email.email) {
+          errors.push('Must be valid email');
         }
         return errors;
       },
@@ -148,16 +150,13 @@
         }
         return errors;
       },
-      emailErrors() {
+      phoneErrors() {
         const errors = [];
-        if (!this.$v.email.$dirty) {
+        if (!this.$v.phone.$dirty) {
           return errors;
         }
-        if (!this.$v.email.required) {
-          errors.push('Email is required');
-        }
-        if (!this.$v.email.email) {
-          errors.push('Must be valid email');
+        if (!this.$v.phone.required) {
+          errors.push('Phone is required');
         }
         return errors;
       },
@@ -196,33 +195,33 @@
       },
       clear() {
         this.$v.$reset();
-        this.username = '';
+        this.email = '';
         this.firstName = '';
         this.lastName = '';
-        this.email = '';
+        this.phone = '';
         this.password = '';
         this.isSubmitted = false;
       },
       registerUser() {
-        const { username, firstName, lastName, email, password } = this;
+        const { email, firstName, lastName, phone, password } = this;
 
         const userProfile = {
-          username,
+          email,
           firstName,
           lastName,
-          email,
+          phone,
           password
         };
 
         this.onSubmit(userProfile);
       },
       canSubmitRequest() {
-        const { username, firstName, lastName, email, password } = this;
+        const { email, firstName, lastName, phone, password } = this;
 
-        return username !== ''
+        return email !== ''
           && firstName !== ''
           && lastName !== ''
-          && email !== ''
+          && phone !== ''
           && password !== ''
           && !this.isSubmitted;
       }
@@ -234,20 +233,12 @@
   @import '../../../assets/stylus/theme.styl';
 
   [data-component-group="auth-form"] {
-    &[data-component="user-profile"] {
+    &[data-component="register"] {
       width: 100%;
 
       .form-actions {
         .trigger.register {
-          border-radius: 4px;
-
-          &.active {
-            color: $colors.shades.white;
-            background-color: $colors.primary;
-          }
-
           .v-icon {
-            width: 10px;
             margin: 0 0 0 6px;
           }
         }
