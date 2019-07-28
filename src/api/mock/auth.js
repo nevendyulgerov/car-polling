@@ -1,5 +1,3 @@
-import userData from './data/user';
-import adminPermissions from './data/adminPermissions';
 import timeout from './data/timeout';
 
 export default {
@@ -8,10 +6,10 @@ export default {
       setTimeout(() => {
         resolve({
           data: {
-            user: userData,
-            permissions: adminPermissions
+            Authorization: 'dummy-authorization',
+            Role: 'dummy-role'
           },
-          message: 'Success'
+          message: 'Welcome to Carpooling!'
         });
       }, timeout);
     });
@@ -21,7 +19,7 @@ export default {
       setTimeout(() => {
         resolve({
           data: {},
-          message: 'Success'
+          message: 'Signed out.'
         });
       }, timeout);
     });
@@ -30,7 +28,9 @@ export default {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          data: {},
+          data: {
+            message: 'Successful registration. You can log in now.'
+          },
           message: 'Success'
         });
       }, timeout);

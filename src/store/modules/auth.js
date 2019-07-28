@@ -1,7 +1,7 @@
 import apiClient from 'api-client';
 import router from '../../router';
 import initialState from '../initialState';
-import { isObj, isStr } from '../../utils';
+import { isObj, isStr, isNull } from '../../utils';
 import store from '../../store';
 import isAuthorized from '../../utils/authorization';
 
@@ -13,8 +13,8 @@ const authApi = apiClient.auth;
  * @returns {boolean}
  */
 const isValid = (auth) => isObj(auth)
-  && isStr(auth.authorization)
-  && isStr(auth.role);
+  && isNull(auth.authorization)
+  && isNull(auth.role);
 
 /**
  * @description Init state
@@ -38,9 +38,12 @@ const initState = initialState => {
  * @type {*}
  */
 export const getters = {
-  authorization: ({ user }) => user,
+  authorization: ({ authorization }) => authorization,
   role: ({ role }) => role,
-  isLogged: ({ role }) => isStr(role) && role !== '',
+  isLogged: ({ role, authorization }) => isStr(role)
+    && role !== ''
+    && isStr(authorization)
+    && authorization !== '',
   isAuthorized: ({ permissions = [] }) => (requestedPermissions = []) => (
     isAuthorized(permissions, requestedPermissions)
   )
@@ -75,16 +78,17 @@ const actions = {
   ),
   register: (context, user) => (
     authApi.register(user).then((res) => {
-      handleAlerts(res.data, 'success');
-      return router.replace({ name: 'login' });
+      router.replace({ name: 'login' });
+
+      return handleAlerts(res.data, 'success');
     })
   ),
   logout: ({ commit }) => (
     authApi.logout().then((res) => {
-      handleAlerts(res.data, 'success');
       actions.resetAll({ commit });
+      router.replace({ name: 'index' });
 
-      return router.replace({ name: 'index' });
+      return handleAlerts(res.data, 'success');
     })
   ),
   reset: ({ commit }) => (
