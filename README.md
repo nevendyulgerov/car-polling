@@ -1,4 +1,4 @@
-# Telerik Beer Tag
+# Card Polling
 
 ## Project setup
 ```
