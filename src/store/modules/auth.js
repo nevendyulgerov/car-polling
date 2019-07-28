@@ -1,7 +1,7 @@
 import apiClient from 'api-client';
 import router from '../../router';
 import initialState from '../initialState';
-import { isObj, isStr, isNull } from '../../utils';
+import { isObj, isNull } from '../../utils';
 import store from '../../store';
 import isAuthorized from '../../utils/authorization';
 
@@ -14,7 +14,8 @@ const authApi = apiClient.auth;
  */
 const isValid = (auth) => isObj(auth)
   && isNull(auth.authorization)
-  && isNull(auth.role);
+  && isNull(auth.role)
+  && isNull(auth.user);
 
 /**
  * @description Init state
@@ -26,10 +27,11 @@ const initState = initialState => {
     throw Error('Invalid initial auth state');
   }
 
-  const { authorization, role } = initialState;
+  const { authorization, role, user } = initialState;
   return {
     authorization,
-    role
+    role,
+    user
   };
 };
 
@@ -40,10 +42,8 @@ const initState = initialState => {
 export const getters = {
   authorization: ({ authorization }) => authorization,
   role: ({ role }) => role,
-  isLogged: ({ role, authorization }) => isStr(role)
-    && role !== ''
-    && isStr(authorization)
-    && authorization !== '',
+  user: ({ user }) => user,
+  isLogged: ({ user }) => isObj(user),
   isAuthorized: ({ permissions = [] }) => (requestedPermissions = []) => (
     isAuthorized(permissions, requestedPermissions)
   )
@@ -64,11 +64,12 @@ const handleAlerts = (data, alertType = 'error') => (
 const actions = {
   login: ({ commit, state }, userAuth) => (
     authApi.login(userAuth).then((res) => {
-      const { Authorization, Role } = res.data;
+      const { Authorization, Role, User } = res.data;
       const nextAuth = {
         ...state,
         authorization: Authorization,
-        role: Role
+        role: Role,
+        user: User
       };
 
       commit('SET', nextAuth);
@@ -109,6 +110,7 @@ const mutations = {
   SET(state, auth) {
     state.authorization = auth.authorization;
     state.role = auth.role;
+    state.user = auth.user;
   }
 };
 

@@ -2,7 +2,7 @@ import userData from './data/user';
 import timeout from './data/timeout';
 
 export default {
-  getUsers(queryFilters) {
+  getUsers() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -12,7 +12,7 @@ export default {
       }, timeout);
     });
   },
-  createUser(user) {
+  getUser() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -22,17 +22,7 @@ export default {
       }, timeout);
     });
   },
-  updateUser(user) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          data: userData,
-          message: 'Success'
-        });
-      }, timeout);
-    });
-  },
-  getUser(id) {
+  updateUser() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({

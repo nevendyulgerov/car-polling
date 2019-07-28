@@ -1,4 +1,5 @@
 import timeout from './data/timeout';
+import mockUser from './data/user';
 
 export default {
   login() {
@@ -7,9 +8,10 @@ export default {
         resolve({
           data: {
             Authorization: 'dummy-authorization',
-            Role: 'dummy-role'
-          },
-          message: 'Welcome to Carpooling!'
+            Role: 'dummy-role',
+            User: mockUser,
+            message: 'Welcome to Carpooling!'
+          }
         });
       }, timeout);
     });
@@ -18,8 +20,9 @@ export default {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          data: {},
-          message: 'Signed out.'
+          data: {
+            message: 'Signed out.'
+          }
         });
       }, timeout);
     });
@@ -30,8 +33,7 @@ export default {
         resolve({
           data: {
             message: 'Successful registration. You can log in now.'
-          },
-          message: 'Success'
+          }
         });
       }, timeout);
     });

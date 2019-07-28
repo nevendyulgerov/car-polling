@@ -114,8 +114,6 @@
     mounted() {
       const { path } = this.$route;
       const { items } = this;
-      
-      console.log('Logged tabs');
 
       this.items = this.updateItems(items, path);
     },

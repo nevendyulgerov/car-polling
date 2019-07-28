@@ -1,7 +1,7 @@
 export default [{
   name: 'settings',
   icon: 'settings',
-  label: 'Settings',
+  label: 'Profile',
   paths: [],
   permissions: [{
     subject: 'user',

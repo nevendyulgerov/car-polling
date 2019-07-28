@@ -4,7 +4,7 @@ export default [
     name: 'beers',
     meta: {
       loadState: true,
-      auth: false,
+      auth: true,
       isAuthPage: false,
       permissions: []
     },

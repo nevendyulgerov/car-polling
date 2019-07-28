@@ -5,7 +5,7 @@ import alertsModule from './store/modules/alerts';
 import authModule from './store/modules/auth';
 import usersModule from './store/modules/users';
 import beersModule from './store/modules/beers';
-import { localStore, sessionStore } from './store/persistentStore';
+import persistentStore from './store/persistentStore';
 
 Vue.use(Vuex);
 
@@ -17,8 +17,7 @@ const options = {
     beers: beersModule(initialState.beers)
   },
   plugins: [
-    localStore.plugin,
-    sessionStore.plugin
+    persistentStore.plugin
   ]
 };
 

@@ -1,7 +1,8 @@
 export default {
+  id: 123,
   firstName: 'John',
   lastName: 'Doe',
-  photoUrl: '/images/placeholder.png',
-  role: 'administrator',
-  ratedBeers: []
+  email: 'john.doe@email.com',
+  avatar: '/images/placeholder.png',
+  rating: 6.5
 };

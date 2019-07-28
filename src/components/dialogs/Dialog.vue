@@ -12,7 +12,7 @@
         <v-card-title class="title">
           <slot name="title" />
         </v-card-title>
-        <v-card-text>
+        <v-card-text v-if="hasContent">
           <v-container
             grid-list-md
             class="content"
@@ -46,6 +46,10 @@
       isFullscreen: {
         type: Boolean,
         default: false
+      },
+      hasContent: {
+        type: Boolean,
+        default: true,
       },
       contentClass: {
         type: String,

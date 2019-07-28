@@ -5,6 +5,10 @@
   >
     <Header logo-pos="center center">
       <LoggedTabs />
+
+      <div class="user-menu-box">
+        <UserMenu />
+      </div>
     </Header>
   </div>
 </template>
@@ -12,13 +16,15 @@
 <script>
   import Header from './Header';
   import LoggedTabs from '../../tabs/Logged';
+  import UserMenu from '../../UserMenu';
 
   // TODO: Update/use CountriesMenu component
 
   export default {
     components: {
       Header,
-      LoggedTabs
+      LoggedTabs,
+      UserMenu
     }
   };
 </script>

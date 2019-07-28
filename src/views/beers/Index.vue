@@ -1,5 +1,6 @@
 <template>
   <div data-view="beers">
+    <!--
     <AddBeerDialog
       :is-on="isAddBeerModalOn"
       :is-loading="isAddingBeer"
@@ -14,6 +15,7 @@
       :on-cancel="toggleEditBeerModal"
       :on-confirm="updateBeer"
     />
+    -->
 
     <layout-logged-frame>
       <template slot="aside">

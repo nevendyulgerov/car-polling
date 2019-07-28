@@ -6,6 +6,7 @@
     <base-dialog
       :content-class="contentClass"
       :is-on="isOn"
+      :has-content="false"
       :max-width="maxWidth"
     >
       <template slot="title">
