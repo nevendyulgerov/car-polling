@@ -1,0 +1,180 @@
+// Declare Vuetify variables here
+
+// General
+// @see https://github.com/vuetifyjs/vuetify/blob/dev/src/stylus/settings/_variables.styl
+
+$border-radius := 4px
+
+// Color
+// @see https://github.com/vuetifyjs/vuetify/blob/dev/src/stylus/settings/_colors.styl#L318
+
+@require '~vuetify/src/stylus/settings/_colors'
+@require '~vuetify/src/stylus/settings/_variables'
+@require '~vuetify/src/stylus/settings/_elevations'
+
+$container-max-widths = 100%
+
+// Theme
+// @see https://github.com/vuetifyjs/vuetify/blob/dev/src/stylus/settings/_theme.styl
+
+$material-light = {
+  status-bar: {
+    regular: #E0E0E0,
+    lights-out: rgba(#fff, .7)
+  },
+  app-bar: #FFFFFF,
+  background: #FAFAFA,
+  cards: #FFFFFF,
+  chips: {
+    background: $grey.lighten-2,
+    color: rgba(#000, .87)
+  },
+  dividers: rgba(#000, .12),
+  text: {
+    theme: #fff,
+    primary: $grey.darken-3,
+    secondary: rgba(#000, .54),
+    disabled: rgba(#000, .38),
+    link: $blue.darken-2,
+    link-hover: $grey.darken-3
+  },
+  icons: {
+    active: rgba(#000, .54),
+    inactive: rgba(#000, .38)
+  },
+  inputs: {
+    box: rgba(#000, .04),
+    solo-inverted: rgba(#000, .16),
+    solo-inverted-focused: #424242,
+    solo-inverted-focused-text: #fff
+  },
+  buttons: {
+    disabled: rgba(#000, .26),
+    focused: rgba(#000, .12),
+    focused-alt: rgba(#fff, .6),
+    pressed: rgba(#999, .4)
+  },
+  expansion-panels: {
+    focus: #EEEEEE
+  },
+  list-tile: {
+    hover: rgba(#000, .04)
+  },
+  selection-controls: {
+    thumb: {
+      inactive: $grey.lighten-5,
+      disabled: $grey.lighten-1
+    },
+    track: {
+      inactive: rgba(#000, .38),
+      disabled: rgba(#000, .12)
+    }
+  },
+  slider: {
+    active: rgba(#000, .38),
+    inactive: rgba(#000, .26),
+    disabled: rgba(#000, .26),
+    discrete: #000
+  },
+  tabs: {
+    active: rgba(#000, .87)
+  },
+  text-fields: {
+    box: rgba(#000, .06),
+    box-hover: rgba(#000, .12)
+  },
+  input-bottom-line: rgba(#000, .42),
+  stepper: {
+    active: rgba(#fff, 1),
+    completed: rgba(#000, 0.87),
+    hover: rgba(#000, 0.54)
+  },
+  table: {
+    active: $grey.lighten-4
+    hover: $grey.lighten-3
+  },
+  picker: {
+    body: #fff,
+    clock: $grey.lighten-2,
+    indeterminateTime: $grey.lighten-1,
+    title: $grey.lighten-2
+  },
+  bg-color: #fff
+  fg-color: #000
+  text-color: #000
+  primary-text-percent: .87
+  secondary-text-percent: .54
+  disabledORhints-text-percent: .38
+  divider-percent: .12
+  active-icon-percent: .54
+  inactive-icon-percent: .38
+}
+
+// Theme colors
+// Have to redefine these for use in stylus as there is seems no way to reference the
+// values defined in Vuetify JS declaration.
+$colors = {
+  red: $red,
+  pink: $pink,
+  purple: $purple,
+  deep-purple: $deep-purple,
+  indigo: $indigo,
+  blue: $blue,
+  light-blue: $light-blue,
+  cyan: $cyan,
+  teal: $teal,
+  green: $green,
+  light-green: $light-green,
+  lime: $lime,
+  yellow: $yellow,
+  amber: $amber,
+  orange: $orange,
+  deep-orange: $deep-orange,
+  brown: $brown,
+  blue-grey: $blue-grey,
+  grey: $grey,
+  shades: $shades,
+  primary: $orange.darken-2,
+  secondary: $grey.darken-4,
+  accent: $orange.darken-2,
+  error: $red.darken-1,
+  warning: $yellow.darken-2,
+  info: $grey.darken-3,
+  success: $green.darken-1,
+  active: linear-gradient(101.62deg, #ffa02f 0%, #ef5131 101.25%)
+}
+
+$colors-dropdown = {
+  charcoal: #35373b,
+  grey: #8f949b,
+  red: #e30034,
+  orange: #ff7900,
+  yellow: #ffb612,
+  green: #51a704,
+  blue: #075ea4,
+  purple: #6d329c
+}
+
+$grid-breakpoints = {
+  xs: 420px,
+  sm: 600px
+  md: 960px
+  lg: (1280px - 16px)
+  xl: (1920px - 16px)
+}
+
+$primary = lightblue
+
+// Alerts
+$alert-border-radius = $border-radius
+$alert-border-width = 0
+$alert-icon-color = #fff
+
+// Buttons
+$button-border-radius = $border-radius
+
+$spacing-sm = 14px
+$spacing-md = 20px
+$spacing-lg = 28px
+
+$min-table-width = 1088px

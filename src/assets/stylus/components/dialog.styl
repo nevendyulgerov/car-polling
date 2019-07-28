@@ -1,0 +1,168 @@
+.dialog.add-item-dialog {
+  .title {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: $grid-breakpoints.md) {
+      width: 100%;
+      margin: 0;
+    }
+
+    .v-icon {
+      font-size: 32px;
+      margin: 0 6px 0 0;
+      color: $colors.shades.black;
+    }
+
+    h1 {
+      font-weight: 600;
+    }
+
+    .trigger.close-dialog {
+      position: absolute;
+      top: 10px;
+      right: 4px;
+      border-radius: 50%;
+      min-width: auto;
+      width: 60px;
+      height: 60px;
+      padding: 0;
+
+      .v-icon {
+        font-size: 32px;
+        margin: 0;
+      }
+
+      &:before {
+        background-color: transparent;
+      }
+    }
+  }
+
+  [data-component="add-new"],
+  [data-component="add-deal"],
+  [data-component="add-campaign"] {
+    padding-top: 32px;
+  }
+
+  .item-url {
+    display: block;
+    font-size: 14px;
+
+    .v-btn {
+      height: auto;
+      text-transform: none;
+    }
+  }
+}
+
+.dialog.edit-item-dialog {
+  .title {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: $grid-breakpoints.md) {
+      width: 100%;
+      margin: 0;
+    }
+
+    .v-icon {
+      font-size: 32px;
+      margin: 0 6px 0 0;
+      color: $colors.shades.black;
+    }
+
+    h1 {
+      font-weight: 600;
+    }
+
+    .trigger.view-item {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      cursor: default;
+
+      &.is-blocked {
+        color: $colors.error;
+
+        .v-icon {
+          color: $colors.error;
+        }
+      }
+
+      .v-btn__content {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      &:before {
+        background-color: transparent;
+      }
+    }
+
+    .title-box {
+      width: 100%;
+
+      .title-wrapper {
+        width: calc(100% - 80px);
+        overflow: hidden;
+
+        h1 {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
+      }
+    }
+
+    .trigger.close-dialog {
+      position: absolute;
+      top: 14px;
+      right: 4px;
+      border-radius: 50%;
+      min-width: auto;
+      width: 60px;
+      height: 60px;
+      padding: 0;
+
+      .v-icon {
+        font-size: 32px;
+        margin: 0;
+      }
+
+      &:before {
+        background-color: transparent;
+      }
+    }
+
+    .item-url {
+      display: block;
+      font-size: 14px;
+      margin-left: -24px;
+
+      .v-btn {
+        height: auto;
+        text-transform: none;
+        transition: 0.15s ease-in-out;
+
+        .v-icon {
+          transition: 0.15s ease-in-out;
+        }
+
+        &.highlighted {
+          color: $colors.primary;
+          transition: 0.15s ease-in-out;
+
+          .v-icon {
+            color: $colors.primary;
+            transition: 0.15s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+}

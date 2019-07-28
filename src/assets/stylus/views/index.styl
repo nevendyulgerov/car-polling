@@ -1,0 +1,42 @@
+.v-content {
+  background-color: $colors.blue-grey.lighten-5;
+}
+
+.form-wrapper,
+.view-wrapper {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+
+  &.normal {
+    width: 540px;
+
+    @media (max-width: $grid-breakpoints.sm) {
+      padding: 0 $spacing-sm;
+    }
+  }
+
+  &.large {
+    width: 860px;
+
+    @media (max-width: $grid-breakpoints.sm) {
+      padding: 0 $spacing-sm;
+    }
+  }
+}
+
+[data-view] {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.v-alert {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.global-alert-box {
+  width: 100%;
+  z-index: 1000;
+}

@@ -1,0 +1,39 @@
+export default [{
+  text: 'Name',
+  value: 'beer_name',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Brewery',
+  value: 'brewery.name',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Country',
+  value: 'origin.name',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'ABV',
+  value: 'abv',
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Description',
+  value: 'description',
+  isSelected: false,
+  isRequired: false
+}, {
+  text: 'Style',
+  value: 'style.name',
+  isSelected: true,
+  isRequired: false
+}, {
+  text: 'Picture',
+  value: 'picture',
+  isSelected: true,
+  isRequired: false
+}];

@@ -1,0 +1,51 @@
+.flatpickr-calendar {
+  font-family: Roboto, sans-serif;
+  @extend .elevation-6;
+  border-radius: 0 !important;
+}
+
+.flatpickr-input {
+  width: 100%;
+  min-height: 57px;
+  padding: 10px;
+  margin: 0 0 30px 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom: 2px solid $colors.grey.base;
+  background-color: $colors.shades.white;
+  outline: none;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+  background: $colors.primary !important;
+  border-color: $colors.primary !important;
+}
+
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n+1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n+1)) {
+  -webkit-box-shadow: -10px 0 0 $colors.primary !important;
+  box-shadow: -10px 0 0 $colors.primary !important;
+}
+
+.flatpickr-day.week.selected {
+  -webkit-box-shadow: -5px 0 0 $colors.primary, 5px 0 0 $colors.primary !important;
+  box-shadow: -5px 0 0 $colors.primary, 5px 0 0 $colors.primary !important;
+}

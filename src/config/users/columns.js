@@ -1,0 +1,52 @@
+export default [{
+  text: 'First name',
+  value: 'firstname',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Last name',
+  value: 'lastname',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Employee',
+  value: 'employee',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Email',
+  value: 'email',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Business',
+  value: 'business.name',
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Role',
+  value: 'role.name',
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Created',
+  value: 'created_at',
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Status',
+  value: 'status.name',
+  isSelected: true
+}, {
+  text: 'Timezone',
+  value: 'timezone',
+  isSelected: false
+}, {
+  text: 'Updated',
+  value: 'updated_at',
+  isSelected: false
+}];
