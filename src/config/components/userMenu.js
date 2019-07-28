@@ -1,12 +1,9 @@
 export default [{
-  name: 'settings',
+  name: 'profile',
   icon: 'settings',
   label: 'Profile',
   paths: [],
-  permissions: [{
-    subject: 'user',
-    actions: ['settings']
-  }],
+  permissions: [],
   redirect: undefined,
   isSelected: false
 }, {

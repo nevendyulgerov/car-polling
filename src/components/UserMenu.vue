@@ -25,7 +25,6 @@
         class="trigger select-item"
         color="secondary"
         dark
-        @click="toggle()"
       >
         <v-icon class="icon-avatar">
           account_circle
@@ -77,8 +76,8 @@
         return this.menuItems.map(item => {
           const nextItem = { ...item };
 
-          if (item.name === 'settings') {
-            nextItem.redirect = `/users/${this.user.id}/settings`;
+          if (item.name === 'profile') {
+            nextItem.redirect = `/users/${this.user.id}/profile`;
             nextItem.paths.push(nextItem.redirect);
           }
 

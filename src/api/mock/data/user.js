@@ -3,6 +3,7 @@ export default {
   firstName: 'John',
   lastName: 'Doe',
   email: 'john.doe@email.com',
-  avatar: '/images/placeholder.png',
+  avatar: '',
+  phone: '98782839718',
   rating: 6.5
 };
