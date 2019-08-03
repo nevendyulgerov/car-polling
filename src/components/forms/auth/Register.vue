@@ -5,6 +5,14 @@
   >
     <Form title="Register">
       <v-text-field
+        v-model="username"
+        label="Username"
+        required
+        :error-messages="usernameErrors"
+        @blur="$v.username.$touch()"
+      />
+
+      <v-text-field
         v-model="email"
         label="Email"
         required
@@ -77,6 +85,9 @@
     },
     mixins: [validationMixin],
     validations: {
+      username: {
+        required
+      },
       email: {
         required,
         email
@@ -106,6 +117,7 @@
     },
     data() {
       return {
+        username: '',
         email: '',
         firstName: '',
         lastName: '',
@@ -117,6 +129,16 @@
       };
     },
     computed: {
+      usernameErrors() {
+        const errors = [];
+        if (!this.$v.username.$dirty) {
+          return errors;
+        }
+        if (!this.$v.username.required) {
+          errors.push('Username is required');
+        }
+        return errors;
+      },
       emailErrors() {
         const errors = [];
         if (!this.$v.email.$dirty) {
@@ -195,6 +217,7 @@
       },
       clear() {
         this.$v.$reset();
+        this.username = '';
         this.email = '';
         this.firstName = '';
         this.lastName = '';
@@ -203,9 +226,10 @@
         this.isSubmitted = false;
       },
       registerUser() {
-        const { email, firstName, lastName, phone, password } = this;
+        const { username, email, firstName, lastName, phone, password } = this;
 
         const userProfile = {
+          username,
           email,
           firstName,
           lastName,
@@ -216,9 +240,10 @@
         this.onSubmit(userProfile);
       },
       canSubmitRequest() {
-        const { email, firstName, lastName, phone, password } = this;
+        const { username, email, firstName, lastName, phone, password } = this;
 
-        return email !== ''
+        return username !== ''
+          && email !== ''
           && firstName !== ''
           && lastName !== ''
           && phone !== ''
