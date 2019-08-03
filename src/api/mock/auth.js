@@ -42,7 +42,10 @@ export default {
     return axios({
       method: 'post',
       url: `${apiUrl}/users/register`,
-      data
+      data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
   },
   /*
