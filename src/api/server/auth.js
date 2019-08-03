@@ -24,7 +24,7 @@ export default {
 
     return axios.post(`${apiUrl}/login`, fd, config);
   },
-  register({ username, firstName, lastName, email, password }) {
+  register({ username, firstName, lastName, email, phone, password }) {
     const fd = new FormData();
     const config = {
       headers: {
@@ -36,9 +36,12 @@ export default {
     fd.append('firstName', firstName);
     fd.append('lastName', lastName);
     fd.append('eMail', email);
+    fd.append('phone', phone);
     fd.append('password', password);
 
-    return axios.post(`${apiUrl}/register`, fd, config);
+    console.log({ username, firstName, lastName, email, phone, password });
+
+    // return axios.post(`${apiUrl}/register`, fd, config);
   },
   logout() {
     const access_token = getToken();

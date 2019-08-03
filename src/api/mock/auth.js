@@ -1,5 +1,7 @@
+import axios from 'axios';
 import timeout from './data/timeout';
 import mockUser from './data/user';
+import { apiUrl } from '../../utils/serverApi';
 
 export default {
   login() {
@@ -27,6 +29,26 @@ export default {
       }, timeout);
     });
   },
+  register({ username, firstName, lastName, email, phone, password }) {
+    const fd = new FormData();
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    };
+
+    fd.append('username', username);
+    fd.append('firstName', firstName);
+    fd.append('lastName', lastName);
+    fd.append('eMail', email);
+    fd.append('phone', phone);
+    fd.append('password', password);
+
+    console.log({ username, firstName, lastName, email, phone, password });
+
+    return axios.post(`${apiUrl}/register`, fd, config);
+  },
+  /*
   register() {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -38,4 +60,5 @@ export default {
       }, timeout);
     });
   }
+  */
 };
