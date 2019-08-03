@@ -30,23 +30,20 @@ export default {
     });
   },
   register({ username, firstName, lastName, email, phone, password }) {
-    const fd = new FormData();
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+    const data = {
+      username,
+      firstName,
+      lastName,
+      email,
+      phone,
+      password
     };
 
-    fd.append('username', username);
-    fd.append('firstName', firstName);
-    fd.append('lastName', lastName);
-    fd.append('eMail', email);
-    fd.append('phone', phone);
-    fd.append('password', password);
-
-    console.log({ username, firstName, lastName, email, phone, password });
-
-    return axios.post(`${apiUrl}/register`, fd, config);
+    return axios({
+      method: 'post',
+      url: `${apiUrl}/users/register`,
+      data
+    });
   },
   /*
   register() {
