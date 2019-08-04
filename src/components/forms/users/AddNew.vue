@@ -26,7 +26,10 @@
         @blur="$v.lastName.$touch()"
       />
 
-      <div class="form-actions">
+      <div
+        v-if="!isDisabled"
+        class="form-actions"
+      >
         <v-btn
           v-if="onCancel"
           depressed
