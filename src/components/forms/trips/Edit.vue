@@ -64,7 +64,8 @@
       isTripDriver() {
         const { trip, loggedUser, hasDriver } = this;
 
-        return hasDriver && trip.driver.id === loggedUser.id;
+        // TODO: Revert logic when logged user is available
+        return true; // hasDriver && trip.driver.id === loggedUser.id;
       }
     },
     watch: {
