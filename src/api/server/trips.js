@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken, getAccessQuery, apiUrl } from '../../utils/serverApi';
 
 export default {
-  getBeers(queryFilters = {}) {
+  getTrips(queryFilters = {}) {
     const {
       page = 1,
       perPage = 15,
@@ -28,18 +28,18 @@ export default {
         abv,
         style
       },
-      url: `${apiUrl}/beers`
+      url: `${apiUrl}/trips`
     });
   },
-  createBeer(beer) {
+  createTrip(trip) {
     const query = {
-      beer_name: beer.name,
-      brewery_id: beer.brewery.id,
-      country_id: beer.country.country_id,
-      abv: beer.abv,
-      description: beer.description,
-      style_id: beer.style.style_id,
-      picture: beer.picture
+      beer_name: trip.name,
+      brewery_id: trip.brewery.id,
+      country_id: trip.country.country_id,
+      abv: trip.abv,
+      description: trip.description,
+      style_id: trip.style.style_id,
+      picture: trip.picture
     };
 
     return axios({
@@ -50,29 +50,23 @@ export default {
       }
     });
   },
-  updateBeer(beer) {
+  updateTrip(trip) {
     const query = {
-      beer_name: beer.name,
-      brewery: beer.brewery,
-      country: beer.country,
-      abv: beer.abv,
-      description: beer.description,
-      style: beer.style,
-      picture: beer.picture
+      beer_name: trip.name,
+      brewery: trip.brewery,
+      country: trip.country,
+      abv: trip.abv,
+      description: trip.description,
+      style: trip.style,
+      picture: trip.picture
     };
 
     return axios({
       method: 'put',
-      url: `${apiUrl}/beers/${beer.id}`,
+      url: `${apiUrl}/trips/${trip.id}`,
       data: {
         ...query
       }
-    });
-  },
-  removeBeer(id) {
-    return axios({
-      method: 'delete',
-      url: `${apiUrl}/beers/${id}`
     });
   },
   getCountries() {

@@ -14,7 +14,7 @@ const options = {
     alerts: alertsModule(initialState.alerts),
     auth: authModule(initialState.auth),
     users: usersModule(initialState.users),
-    beers: tripsModule(initialState.trips)
+    trips: tripsModule(initialState.trips)
   },
   plugins: [
     persistentStore.plugin

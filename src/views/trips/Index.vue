@@ -1,25 +1,25 @@
 <template>
-  <div data-view="beers">
+  <div data-view="trips">
     <!--
     <AddBeerDialog
-      :is-on="isAddBeerModalOn"
-      :is-loading="isAddingBeer"
-      :on-cancel="toggleNewBeerModal"
-      :on-confirm="createBeer"
+      :is-on="isAddTripModalOn"
+      :is-loading="isAddingTrip"
+      :on-cancel="toggleNewTripModal"
+      :on-confirm="createTrip"
     />
 
     <EditBeerDialog
-      :beer="selectedBeer"
-      :is-on="isEditBeerModalOn"
-      :is-loading="isEditingBeer"
-      :on-cancel="toggleEditBeerModal"
-      :on-confirm="updateBeer"
+      :beer="selectedTrip"
+      :is-on="isEditTripModalOn"
+      :is-loading="isEditingTrip"
+      :on-cancel="toggleEditTripModal"
+      :on-confirm="updateTrip"
     />
     -->
 
     <layout-logged-frame>
       <template slot="aside">
-        <BeerFilters
+        <TripFilters
           @filter="onFilter"
           @clearFilters="onClearFilters"
         />
@@ -27,21 +27,21 @@
       <template slot="content">
         <base-table
           :columns="columns"
-          :items="beers"
+          :items="trips"
           :pages="totalPages"
           :pagination="pagination"
           :can-edit-columns="false"
           :has-custom-items-template="true"
           :is-loading="isLoading"
-          :on-select-item="selectBeer"
+          :on-select-item="selectTrip"
           :on-update-pagination="updatePagination"
         >
           <template slot="title">
-            <h1>{{ 'All' }}</h1>
+            <h1>{{ 'Trips' }}</h1>
             <span class="heading-separator">
               {{ ' / ' }}
             </span>
-            <h2>{{ `${totalCount} beer${totalCount > 1 ? 's' : ''}` }}</h2>
+            <h2>{{ totalCount }}</h2>
           </template>
 
           <template
@@ -63,12 +63,12 @@
             <v-btn
               class="trigger add-new-item elevation-4"
               color="secondary"
-              @click="toggleNewBeerModal"
+              @click="toggleNewTripModal"
             >
               <v-icon>
                 local_drink
               </v-icon>
-              {{ 'Add new beer' }}
+              {{ 'Add new trip' }}
             </v-btn>
           </template>
         </base-table>
@@ -78,17 +78,17 @@
 </template>
 
 <script>
-  import BeerFilters from '../../components/forms/filters/Beers';
+  import TripFilters from '../../components/forms/filters/Trips';
   import AddBeerDialog from '../../components/dialogs/beers/AddDialog';
   import EditBeerDialog from '../../components/dialogs/beers/EditDialog';
   import { extractNestedProp, isStr } from '../../utils';
-  import columns from '../../config/beers/columns';
+  import columns from '../../config/trips/columns';
 
   export default {
     components: {
       AddBeerDialog,
       EditBeerDialog,
-      BeerFilters
+      TripFilters
     },
     data() {
       return {
@@ -97,49 +97,46 @@
           descending: true,
           page: 1,
           rowsPerPage: 15,
-          sortBy: 'name',
+          sortBy: 'origin',
           totalItems: 0,
           search: ''
         },
-        selectedBeer: {},
+        selectedTrip: {},
         totalPages: 0,
         query: {},
-        isEditBeerModalOn: false,
-        isEditingBeer: false,
-        isAddBeerModalOn: false,
-        isAddingBeer: false,
+        isEditTripModalOn: false,
+        isEditingTrip: false,
+        isAddTripModalOn: false,
+        isAddingTrip: false,
         isLoading: false
       };
     },
     computed: {
-      beers() {
-        return this.$store.getters['beers/items'];
+      trips() {
+        return this.$store.getters['trips/items'];
       },
       totalCount() {
-        return this.beers.length;
+        return this.trips.length;
       }
     },
     created() {
       const { query, pagination } = this;
       const { sortBy } = pagination;
 
-      this.getBeers({
+      this.getTrips({
         ...query,
         sort: sortBy
       });
     },
     methods: {
-      getBeers({ page = 1, perPage = 15, order = 'asc', sort = '', search = '', brewery = '', country = '', abv = 0, style = '' } = {}) {
+      getTrips({ page = 1, perPage = 15, order = 'asc', sort = '', origin = '', destination = '' } = {}) {
         const query = {
           page,
           perPage,
           order,
           sort,
-          search,
-          brewery,
-          country,
-          abv,
-          style
+          origin,
+          destination
         };
 
         this.isLoading = true;
@@ -149,7 +146,7 @@
           this.pagination.sortBy = sort;
         }
 
-        return this.$store.dispatch('beers/getBeers', query)
+        return this.$store.dispatch('trips/getTrips', query)
           .then((res) => {
             this.isLoading = false;
             return res;
@@ -159,46 +156,47 @@
             return err;
           });
       },
-      selectBeer(beer) {
-        this.selectedBeer = beer;
-        this.toggleEditBeerModal();
+      selectTrip(trip) {
+        this.selectedTrip = trip;
+        this.toggleEditTripModal();
       },
       displayColumnValue(item, columnValue) {
         return extractNestedProp(item, columnValue);
       },
-      toggleEditBeerModal() {
-        this.isEditBeerModalOn = !this.isEditBeerModalOn;
+      toggleEditTripModal() {
+        this.isEditTripModalOn = !this.isEditTripModalOn;
       },
-      toggleNewBeerModal() {
-        this.isAddBeerModalOn = !this.isAddBeerModalOn;
+      toggleNewTripModal() {
+        this.isAddTripModalOn = !this.isAddTripModalOn;
       },
-      createBeer(beer) {
-        this.isAddingBeer = true;
-        return this.$store.dispatch('beers/createBeer', beer)
+      createTrip(trip) {
+        this.isAddingTrip = true;
+        return this.$store.dispatch('trips/createTrip', trip)
           .then((res) => {
-            this.isAddingBeer = false;
-            this.toggleNewBeerModal();
+            this.isAddingTrip = false;
+            this.toggleNewTripModal();
             return res;
           })
           .catch((err) => {
-            this.isAddingBeer = false;
+            this.isAddingTrip = false;
             return err;
           });
       },
-      updateBeer(beer) {
+      updateTrip(trip) {
         const query = {
-          id: this.selectedBeer.id,
-          ...beer
+          id: this.selectedTrip.id,
+          ...trip
         };
-        this.isEditingBeer = true;
-        return this.$store.dispatch('beers/updateBeer', query)
+
+        this.isEditingTrip = true;
+        return this.$store.dispatch('trips/updateTrip', query)
           .then((res) => {
-            this.isEditingBeer = false;
-            this.toggleEditBeerModal();
+            this.isEditingTrip = false;
+            this.toggleEditTripModal();
             return res;
           })
           .catch((err) => {
-            this.isEditingBeer = false;
+            this.isEditingTrip = false;
             return err;
           });
       },
@@ -208,36 +206,19 @@
           ...this.getSearchQuery(filters)
         };
 
-        this.getBeers(this.query);
+        this.getTrips(this.query);
       },
       onClearFilters() {
         const { sortBy } = this.pagination;
         this.query = { sort: sortBy };
 
-        this.getBeers(this.query);
+        this.getTrips(this.query);
       },
-      getSearchQuery({ search, brewery, country, abv, style }) {
+      getSearchQuery({ origin, destination }) {
         const query = {};
 
-        if (search !== '') {
-          query.search = search;
-        }
-
-        if (brewery !== '') {
-          query.brewery = brewery;
-        }
-
-        if (country !== '') {
-          query.country = country;
-        }
-
-        if (abv > 0) {
-          query.abv = abv;
-        }
-
-        if (style !== '') {
-          query.style = style;
-        }
+        query.origin = origin;
+        query.destination = destination;
 
         return query;
       },
@@ -252,19 +233,19 @@
 
         this.query = nextQuery;
 
-        this.getBeers(nextQuery);
+        this.getTrips(nextQuery);
       },
     },
     metaInfo() {
       return {
-        title: 'Beers'
+        title: 'Trips'
       };
     }
   };
 </script>
 
 <style lang="stylus">
-  [data-view="beers"] {
+  [data-view="trips"] {
     .view-wrapper {
       padding: 32px 0 0 0;
     }

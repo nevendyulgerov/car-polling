@@ -242,21 +242,21 @@
         this.isSubmitted = false;
       },
       getCountries() {
-        return this.$store.dispatch('beers/getCountries')
+        return this.$store.dispatch('trips/getCountries')
           .then((countries) => {
             this.countries = countries;
             return countries;
           });
       },
       getBreweries() {
-        return this.$store.dispatch('beers/getBreweries')
+        return this.$store.dispatch('trips/getBreweries')
           .then((breweries) => {
             this.breweries = breweries;
             return breweries;
           });
       },
       getStyles() {
-        return this.$store.dispatch('beers/getStyles')
+        return this.$store.dispatch('trips/getStyles')
           .then((styles) => {
             this.styles = styles;
             return styles;

@@ -2,18 +2,16 @@ import apiClient from 'api-client';
 import { isObj, isArr } from '../../utils';
 import store from '../../store';
 import initialState from '../initialState';
-import tripsApi from '../../api/server/trips';
 
-const beersApi = apiClient.beers;
-
+const tripsApi = apiClient.trips;
 
 /**
  * @description Is valid
- * @param beers
+ * @param trips
  * @returns {boolean}
  */
-const isValid = (beers) => {
-  const { activeItem, items, itemsMeta } = beers;
+const isValid = (trips) => {
+  const { activeItem, items, itemsMeta } = trips;
 
   return isObj(activeItem)
     && isArr(items)
@@ -27,7 +25,7 @@ const isValid = (beers) => {
  */
 const initState = initialState => {
   if (!isValid(initialState)) {
-    throw Error('Invalid initial beers state');
+    throw Error('Invalid initial trips state');
   }
 
   const { activeItem, items, itemsMeta } = initialState;
@@ -65,8 +63,8 @@ const actions = {
   getCategories: () => (
     tripsApi.getCategories()
   ),
-  getBeers: ({ commit, state }, query) => (
-    beersApi.getBeers(query).then((res) => {
+  getTrips: ({ commit, state }, query) => (
+    tripsApi.getTrips(query).then((res) => {
       const nextItemsData = {
         items: res.data
       };
@@ -81,8 +79,8 @@ const actions = {
       return nextItemsData;
     })
   ),
-  getBeer: ({ commit, state }, query) => (
-    beersApi.getBeer(query).then((res) => {
+  getTrip: ({ commit, state }, query) => (
+    tripsApi.getTrip(query).then((res) => {
       const { activeItem } = state;
       const nextActiveItem = {
         ...activeItem,
@@ -100,20 +98,20 @@ const actions = {
     })
   ),
   getCountries: () => (
-    beersApi.getCountries().then(res => res.data)
+    tripsApi.getCountries().then(res => res.data)
   ),
   getBreweries: () => (
-    beersApi.getBreweries().then(res => res.data)
+    tripsApi.getBreweries().then(res => res.data)
   ),
   getStyles: () => (
-    beersApi.getStyles().then(res => res.data)
+    tripsApi.getStyles().then(res => res.data)
   ),
-  createBeer: ({ commit, state }, beer) => (
-    beersApi.createBeer(beer).then((res) => {
-      const nextBeer = res.data;
+  createTrip: ({ commit, state }, trip) => (
+    tripsApi.createTrip(trip).then((res) => {
+      const nextTrip = res.data;
       const nextItems = [
         ...state.items,
-        nextBeer
+        nextTrip
       ];
 
       const nextState = {
@@ -125,19 +123,19 @@ const actions = {
 
       handleAlerts({
         data: {
-          message: 'Beer created successfully.'
+          message: 'Trip created successfully.'
         }
       }, 'success');
 
       return nextItems;
     })
   ),
-  updateBeer: ({ commit, state }, beer) => (
-    beersApi.updateBeer(beer).then((res) => {
-      const nextBeer = res.data;
+  updateTrip: ({ commit, state }, trip) => (
+    tripsApi.updateTrip(trip).then((res) => {
+      const nextTrip = res.data;
       const nextItems = state.items.map((item) => {
-        return item.id === nextBeer.id
-          ? nextBeer
+        return item.id === nextTrip.id
+          ? nextTrip
           : item;
       });
 
@@ -150,43 +148,43 @@ const actions = {
 
       handleAlerts({
         data: {
-          message: 'Beer updated successfully.'
+          message: 'Trip updated successfully.'
         }
       }, 'success');
 
       return nextItems;
     })
   ),
-  removeBeer: (context, user) => (
-    beersApi.removeBeer(user).then(() => (
+  removeTrip: (context, trip) => (
+    tripsApi.removeTrip(trip).then(() => (
       handleAlerts({
         data: {
-          message: 'Beer removed successfully.'
+          message: 'Trip removed successfully.'
         }
       }, 'success')
     ))
   ),
-  setActiveBeer: ({ commit, state }, beer) => {
+  setActiveTrip: ({ commit, state }, trip) => {
     const nextState = {
       ...state,
-      activeItem: beer
+      activeItem: trip
     };
 
     return commit('SET', nextState);
   },
   reset: ({ commit }) => (
-    commit('SET', initialState.beers)
+    commit('SET', initialState.trips)
   ),
-  set: ({ commit }, beers) => {
-    commit('SET', beers);
+  set: ({ commit }, trips) => {
+    commit('SET', trips);
   }
 };
 
 const mutations = {
-  SET(state, beers) {
-    state.activeItem = beers.activeItem;
-    state.items = beers.items;
-    state.itemsMeta = beers.itemsMeta;
+  SET(state, trips) {
+    state.activeItem = trips.activeItem;
+    state.items = trips.items;
+    state.itemsMeta = trips.itemsMeta;
   }
 };
 

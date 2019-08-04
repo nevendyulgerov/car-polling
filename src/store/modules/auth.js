@@ -99,7 +99,7 @@ const actions = {
     actions.reset({ commit });
     store.dispatch('auth/reset');
     store.dispatch('users/reset');
-    store.dispatch('beers/reset');
+    store.dispatch('trips/reset');
   },
   set: ({ commit }, auth) => {
     commit('SET', auth);
