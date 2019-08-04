@@ -30,11 +30,11 @@ export default {
     }
 
     if (departureTime !== '') {
-      params.departureTime = departureTime;
+      params.departure_time = departureTime;
     }
 
     if (availablePlaces > -1) {
-      params.availablePlaces = availablePlaces;
+      params.available_places = availablePlaces;
     }
 
     return new Promise((resolve) => {

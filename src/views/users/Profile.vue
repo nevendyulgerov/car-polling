@@ -32,9 +32,3 @@
     }
   };
 </script>
-
-<style lang="stylus" scoped>
-  [data-view="profile"] {
-
-  }
-</style>

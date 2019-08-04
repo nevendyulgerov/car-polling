@@ -8,17 +8,45 @@ export default {
       perPage = 15,
       order = 'asc',
       sort = '',
-      search = '',
-      role = ''
+      search = ''
     } = queryFilters;
 
-    const token = getAccessQuery();
-    const query = `${token}&page=${page}&per_page=${perPage}&order=${order}&sort=${sort}&search=${search}&role=${role}`;
+    const params = {
+      page,
+      per_page: perPage,
+      sort,
+      order
+    };
 
+    if (search !== '') {
+      params.search = search;
+    }
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: [{
+            id: 1,
+            firstName: 'John',
+            lastName: 'Doe',
+            avatar: 'https://www.alessandromichelazzi.com/wp-content/uploads/2018/02/google-pixel-2-sample-photos-Cover-1.jpg'
+          }, {
+            id: 2,
+            firstName: 'Jane',
+            lastName: 'Due',
+            avatar: 'https://i.ytimg.com/vi/XGSIU39Y7WU/maxresdefault.jpg'
+          }]
+        });
+      });
+    });
+
+    /*
     return axios({
       method: 'get',
-      url: `${apiUrl}/users${query}`
+      url: `${apiUrl}/users`,
+      params
     });
+     */
   },
   getUser(id) {
     const query = getAccessQuery();
@@ -49,14 +77,6 @@ export default {
       data: {
         ...user
       }
-    });
-  },
-  removeUser(id) {
-    const query = getAccessQuery();
-
-    return axios({
-      method: 'delete',
-      url: `${apiUrl}/users/${id}${query}`
     });
   }
 };

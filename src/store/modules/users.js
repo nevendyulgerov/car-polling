@@ -62,10 +62,9 @@ const handleAlerts = (data, alertType = 'error') => (
 const actions = {
   getUsers: ({ commit, state }, query) => (
     usersApi.getUsers(query).then((res) => {
-      const { data, meta } = res.data;
       const nextItemsData = {
-        items: data,
-        itemsMeta: meta
+        items: res.data,
+        itemsMeta: {}
       };
 
       const nextState = {
@@ -132,15 +131,6 @@ const actions = {
 
       return nextUser;
     })
-  ),
-  removeUser: (context, user) => (
-    usersApi.removeUser(user).then(() => (
-      handleAlerts({
-        data: {
-          message: 'User removed successfully.'
-        }
-      }, 'success')
-    ))
   ),
   setActiveUser: ({ commit, state }, user) => {
     const nextState = {

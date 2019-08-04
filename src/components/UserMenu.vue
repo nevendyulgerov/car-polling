@@ -60,6 +60,7 @@
 
 <script>
   import menuItems from '../config/components/userMenu';
+  import { isObj } from '../utils';
 
   // TODO: Translate component
 
@@ -77,18 +78,23 @@
           const nextItem = { ...item };
 
           if (item.name === 'profile') {
-            nextItem.redirect = `/users/${this.user.id}/profile`;
+            nextItem.redirect = `/users/${this.loggedUser.id}/profile`;
             nextItem.paths.push(nextItem.redirect);
           }
 
           return nextItem;
         });
       },
-      user() {
-        return this.$store.getters['auth/user'];
+      loggedUser() {
+        const user = this.$store.getters['auth/user'];
+        return isObj(user) ? user : {
+          id: '',
+          firstName: '',
+          lastName: ''
+        };
       },
       userName() {
-        const { firstName, lastName } = this.user;
+        const { firstName, lastName } = this.loggedUser;
         return `${firstName} ${lastName}`;
       }
     },

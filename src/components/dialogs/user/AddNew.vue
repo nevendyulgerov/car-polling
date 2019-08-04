@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import AddNewUserForm from '../../forms/user/AddNew';
+  import AddNewUserForm from '../../forms/users/AddNew';
 
   export default {
     components: {
