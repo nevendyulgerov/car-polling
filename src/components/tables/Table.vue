@@ -5,6 +5,7 @@
         <slot name="title" />
       </div>
       <div :class="getComponentActionsClass()">
+        <slot name="actions" />
         <base-dropdown
           v-if="canEditColumns"
           title="Edit columns"
@@ -13,7 +14,6 @@
           item-value="text"
           :on-change-item="onChangeColumn"
         />
-        <slot name="actions" />
       </div>
     </div>
     <v-data-table

@@ -11,7 +11,7 @@
       :on-close="onCancel"
     >
       <template slot="content">
-        <AddNewBeerForm
+        <AddTripForm
           :is-loading="isLoading"
           :on-cancel="onCancel"
           :on-submit="onConfirm"
@@ -22,11 +22,11 @@
 </template>
 
 <script>
-  import AddNewBeerForm from '../../forms/beers/AddNew';
+  import AddTripForm from '../../forms/trips/AddNew';
 
   export default {
     components: {
-      AddNewBeerForm
+      AddTripForm
     },
     props: {
       isOn: {

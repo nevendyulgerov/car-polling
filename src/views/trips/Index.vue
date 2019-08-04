@@ -1,14 +1,14 @@
 <template>
   <div data-view="trips">
     <!--
-    <AddBeerDialog
+    <AddTripDialog
       :is-on="isAddTripModalOn"
       :is-loading="isAddingTrip"
       :on-cancel="toggleNewTripModal"
       :on-confirm="createTrip"
     />
 
-    <EditBeerDialog
+    <EditTripDialog
       :beer="selectedTrip"
       :is-on="isEditTripModalOn"
       :is-loading="isEditingTrip"
@@ -30,8 +30,8 @@
           :items="trips"
           :pages="totalPages"
           :pagination="pagination"
-          :can-edit-columns="false"
           :has-custom-items-template="true"
+          :can-edit-columns="false"
           :is-loading="isLoading"
           :on-select-item="selectTrip"
           :on-update-pagination="updatePagination"
@@ -79,15 +79,15 @@
 
 <script>
   import TripFilters from '../../components/forms/filters/Trips';
-  import AddBeerDialog from '../../components/dialogs/beers/AddDialog';
-  import EditBeerDialog from '../../components/dialogs/beers/EditDialog';
+  import AddTripDialog from '../../components/dialogs/trips/AddDialog';
+  import EditTripDialog from '../../components/dialogs/trips/EditDialog';
   import { extractNestedProp, isStr } from '../../utils';
   import columns from '../../config/trips/columns';
 
   export default {
     components: {
-      AddBeerDialog,
-      EditBeerDialog,
+      AddTripDialog,
+      EditTripDialog,
       TripFilters
     },
     data() {

@@ -10,7 +10,7 @@ export default {
             Authorization: 'dummy-authorization',
             Role: 'dummy-role',
             User: {
-              id: 123,
+              id: 1,
               firstName: 'John',
               lastName: 'Doe',
               email: 'john.doe@email.com',

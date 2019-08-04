@@ -1,7 +1,6 @@
 <template>
   <div data-component="dropdown">
     <v-menu
-      v-model="isOn"
       bottom
       offset-y
       :max-height="maxHeight"

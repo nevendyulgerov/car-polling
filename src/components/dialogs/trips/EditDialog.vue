@@ -11,7 +11,7 @@
       :on-close="onCancel"
     >
       <template slot="content">
-        <EditBeerForm
+        <EditTripForm
           :beer="beer"
           :is-loading="isLoading"
           :on-cancel="onCancel"
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-  import EditBeerForm from '../../forms/beers/Edit';
+  import EditTripForm from '../../forms/trips/Edit';
   import { isStr } from '../../../utils';
 
   export default {
     components: {
-      EditBeerForm
+      EditTripForm
     },
     props: {
       beer: {

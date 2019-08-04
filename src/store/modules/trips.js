@@ -155,15 +155,6 @@ const actions = {
       return nextItems;
     })
   ),
-  removeTrip: (context, trip) => (
-    tripsApi.removeTrip(trip).then(() => (
-      handleAlerts({
-        data: {
-          message: 'Trip removed successfully.'
-        }
-      }, 'success')
-    ))
-  ),
   setActiveTrip: ({ commit, state }, trip) => {
     const nextState = {
       ...state,

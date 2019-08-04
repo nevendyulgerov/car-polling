@@ -6,7 +6,7 @@ export default [{
   isRequired: true
 }, {
   text: 'Destination',
-  value: 'destination.name',
+  value: 'destination',
   isDefault: true,
   isSelected: true,
   isRequired: true
@@ -17,18 +17,33 @@ export default [{
   isSelected: true,
   isRequired: true
 }, {
-  text: 'Smoking allowed',
-  value: 'smoking',
+  text: 'Departure time',
+  value: 'departureTime',
+  isDefault: true,
   isSelected: true,
   isRequired: true
 }, {
+  text: 'Smoking allowed',
+  value: 'smoking',
+  isDefault: true,
+  isSelected: true,
+  isRequired: false
+}, {
   text: 'Pets allowed',
   value: 'pets',
-  isSelected: false,
+  isDefault: true,
+  isSelected: true,
   isRequired: false
 }, {
   text: 'Luggage allowed',
   value: 'luggage',
   isSelected: true,
+  isDefault: true,
+  isRequired: false
+}, {
+  text: 'Comment',
+  value: 'comment',
+  isSelected: false,
+  isDefault: false,
   isRequired: false
 }];
