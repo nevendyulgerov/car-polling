@@ -184,7 +184,7 @@
         departureTime: '',
         origin: '',
         destination: '',
-        defaultDepartureTime: this.$moment().startOf('day').format(dateFormat),
+        defaultDepartureTime: this.$moment().startOf('day').format(),
         availablePlaces: '',
         smoking: false,
         pets: false,
@@ -248,6 +248,9 @@
           errors.push('Destination is required');
         }
         return errors;
+      },
+      hasTrip() {
+        return isObj(this.trip);
       }
     },
     watch: {
