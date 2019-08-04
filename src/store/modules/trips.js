@@ -97,15 +97,6 @@ const actions = {
       return nextActiveItem;
     })
   ),
-  getCountries: () => (
-    tripsApi.getCountries().then(res => res.data)
-  ),
-  getBreweries: () => (
-    tripsApi.getBreweries().then(res => res.data)
-  ),
-  getStyles: () => (
-    tripsApi.getStyles().then(res => res.data)
-  ),
   createTrip: ({ commit, state }, trip) => (
     tripsApi.createTrip(trip).then((res) => {
       const nextTrip = res.data;

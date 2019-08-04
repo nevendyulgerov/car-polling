@@ -7,15 +7,13 @@
       :on-confirm="createTrip"
     />
 
-    <!--
     <EditTripDialog
-      :beer="selectedTrip"
+      :trip="selectedTrip"
       :is-on="isEditTripModalOn"
       :is-loading="isEditingTrip"
       :on-cancel="toggleEditTripModal"
       :on-confirm="updateTrip"
     />
-    -->
 
     <layout-logged-frame>
       <template slot="aside">
@@ -57,7 +55,7 @@
               </v-icon>
             </div>
             <div v-else-if="scope.cell.column.value === 'departureTime'">
-              {{ $moment(scope.cell.item.departureTime).format('DD MMM, YYYY HH:mm') }}
+              {{ $moment(scope.cell.item.departureTime).format(dateFormat) }}
             </div>
             <div v-else>
               {{ displayColumnValue(scope.cell.item, scope.cell.column.value) }}
@@ -88,6 +86,7 @@
   import EditTripDialog from '../../components/dialogs/trips/EditDialog';
   import { extractNestedProp, isStr } from '../../utils';
   import columns from '../../config/trips/columns';
+  import dateFormat from '../../config/dateFormat';
 
   export default {
     components: {
@@ -109,6 +108,7 @@
         selectedTrip: {},
         totalPages: 0,
         query: {},
+        dateFormat,
         isEditTripModalOn: false,
         isEditingTrip: false,
         isAddTripModalOn: false,
@@ -180,6 +180,7 @@
       },
       createTrip(trip) {
         this.isAddingTrip = true;
+
         return this.$store.dispatch('trips/createTrip', trip)
           .then((res) => {
             this.isAddingTrip = false;

@@ -1,6 +1,6 @@
 <template>
   <div
-    data-component-group="beers-dialog"
+    data-component-group="trips-dialog"
     data-component="add-new"
   >
     <base-add-dialog

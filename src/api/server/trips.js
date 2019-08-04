@@ -123,41 +123,31 @@ export default {
      */
   },
   createTrip(trip) {
-    const query = {
-      beer_name: trip.name,
-      brewery_id: trip.brewery.id,
-      country_id: trip.country.country_id,
-      abv: trip.abv,
-      description: trip.description,
-      style_id: trip.style.style_id,
-      picture: trip.picture
-    };
+    console.warn('createTrip::');
+    console.log(trip);
 
+    /*
     return axios({
       method: 'post',
-      url: `${apiUrl}/beers`,
+      url: `${apiUrl}/trips`,
       data: {
-        ...query
+        ...trip
       }
     });
+     */
   },
   updateTrip(trip) {
-    const query = {
-      beer_name: trip.name,
-      brewery: trip.brewery,
-      country: trip.country,
-      abv: trip.abv,
-      description: trip.description,
-      style: trip.style,
-      picture: trip.picture
-    };
+    console.warn('updateTrip::');
+    console.log(trip);
 
+    /*
     return axios({
       method: 'put',
       url: `${apiUrl}/trips/${trip.id}`,
       data: {
-        ...query
+        ...trip
       }
     });
+     */
   }
 };

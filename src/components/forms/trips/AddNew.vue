@@ -8,22 +8,31 @@
 
     <form @:submit.prevent="onSubmit">
       <v-text-field
-        v-model="carModel"
-        label="Car model"
+        v-model="origin"
+        :readonly="isDisabled"
+        label="Origin"
         type="text"
         :autofocus="true"
-        :error-messages="carModelErrors"
-        @blur="$v.carModel.$touch()"
+        prepend-inner-icon="my_location"
+        :error-messages="originErrors"
+        @blur="$v.origin.$touch()"
       />
 
-      <v-textarea
-        v-model="message"
-        label="Message"
+      <v-text-field
+        v-model="destination"
+        :readonly="isDisabled"
+        label="Destination"
+        type="text"
+        :autofocus="true"
+        prepend-inner-icon="location_searching"
+        :error-messages="destinationErrors"
+        @blur="$v.destination.$touch()"
       />
 
       <base-date-picker
         placeholder="Departure time"
         :date="departureTime"
+        :readonly="isDisabled"
         :default-date="defaultDepartureTime"
         :is-required="true"
         :is-boxed="false"
@@ -32,6 +41,59 @@
         :on-blur="$v.departureTime.$touch"
         :error-messages="departureTimeErrors"
         :on-change="onChangeDepartureTime"
+      />
+
+      <v-text-field
+        v-model="carModel"
+        :readonly="isDisabled"
+        label="Car model"
+        type="text"
+        :autofocus="true"
+        :error-messages="carModelErrors"
+        @blur="$v.carModel.$touch()"
+      />
+
+      <v-text-field
+        v-model="availablePlaces"
+        :readonly="isDisabled"
+        type="number"
+        step="1"
+        min="0"
+        max="100"
+        label="Available places"
+        prepend-inner-icon="airline_seat_recline_normal"
+        :error-messages="availablePlacesErrors"
+        @blur="$v.availablePlaces.$touch()"
+      />
+
+      <v-textarea
+        v-model="message"
+        :readonly="isDisabled"
+        label="Message"
+      />
+
+      <v-checkbox
+        v-model="smoking"
+        label="Smoking allowed"
+        primary
+        hide-details
+        :readonly="isDisabled"
+      />
+
+      <v-checkbox
+        v-model="pets"
+        label="Pets allowed"
+        primary
+        hide-details
+        :readonly="isDisabled"
+      />
+
+      <v-checkbox
+        v-model="luggage"
+        label="Luggage allowed"
+        primary
+        hide-details
+        :readonly="isDisabled"
       />
 
       <div class="form-actions">
@@ -62,9 +124,8 @@
 <script>
   import { validationMixin } from 'vuelidate';
   import { required } from 'vuelidate/lib/validators';
+  import dateFormat from '../../../config/dateFormat';
   import { isObj } from '../../../utils';
-
-  const dateFormat = 'DD MMM YYYY HH:mm';
 
   export default {
     mixins: [validationMixin],
@@ -74,6 +135,15 @@
           required
         },
         departureTime: {
+          required
+        },
+        availablePlaces: {
+          required
+        },
+        origin: {
+          required
+        },
+        destination: {
           required
         }
       };
@@ -109,7 +179,13 @@
         carModel: '',
         message: '',
         departureTime: '',
+        origin: '',
+        destination: '',
         defaultDepartureTime: this.$moment().startOf('day').format(dateFormat),
+        availablePlaces: '',
+        smoking: false,
+        pets: false,
+        luggage: false,
         dateConfig: {
           format: 'm/d/Y H:i',
           altFormat: 'm/d/Y H:i',
@@ -137,6 +213,36 @@
         }
         if (!this.$v.departureTime.required) {
           errors.push('Departure time is required');
+        }
+        return errors;
+      },
+      availablePlacesErrors() {
+        const errors = [];
+        if (!this.$v.availablePlaces.$dirty) {
+          return errors;
+        }
+        if (!this.$v.availablePlaces.required) {
+          errors.push('Available places is required');
+        }
+        return errors;
+      },
+      originErrors() {
+        const errors = [];
+        if (!this.$v.origin.$dirty) {
+          return errors;
+        }
+        if (!this.$v.origin.required) {
+          errors.push('Origin is required');
+        }
+        return errors;
+      },
+      destinationErrors() {
+        const errors = [];
+        if (!this.$v.destination.$dirty) {
+          return errors;
+        }
+        if (!this.$v.destination.required) {
+          errors.push('Destination is required');
         }
         return errors;
       }
@@ -169,36 +275,56 @@
         this.carModel = '';
         this.message = '';
         this.departureTime = '';
+        this.origin = '';
+        this.destination = '';
+        this.availablePlaces = '';
+        this.smoking = false;
+        this.pets = false;
+        this.luggage = false;
         this.isSubmitted = false;
       },
       addTrip() {
-        const { carModel, message, departureTime } = this;
+        const { carModel, message, departureTime, availablePlaces, origin, destination, smoking, pets, luggage } = this;
 
         const trip = {
           carModel,
           message,
-          departureTime
+          departureTime: this.$moment(departureTime).format('YYYY-MM-DD[T]HH:mm:ss:sss'),
+          availablePlaces,
+          origin,
+          destination,
+          smoking,
+          pets,
+          luggage
         };
 
         return this.onSubmit(trip)
           .then(() => this.clear());
       },
       canSubmitRequest() {
-        const { carModel, message, departureTime } = this;
+        const { carModel, departureTime, availablePlaces, origin, destination } = this;
 
         return carModel !== ''
-          && message !== ''
-          && departureTime !== '';
+          && departureTime !== ''
+          && availablePlaces !== ''
+          && origin
+          && destination;
       },
       onChangeDepartureTime(departureTime) {
         this.departureTime = departureTime;
       },
       extractTripDate(trip) {
-        const { carModel, message, departureTime } = trip;
+        const { carModel, message, departureTime, availablePlaces, origin, destination, smoking, pets, luggage } = trip;
 
         this.carModel = carModel;
         this.message = message;
-        this.departureTime = departureTime;
+        this.origin = origin;
+        this.destination = destination;
+        this.departureTime = this.$moment(departureTime).format(dateFormat);
+        this.availablePlaces = availablePlaces;
+        this.smoking = smoking;
+        this.pets = pets;
+        this.luggage = luggage;
       }
     }
   };

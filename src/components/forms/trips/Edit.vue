@@ -1,35 +1,38 @@
 <template>
   <div
-    data-component-group="beers-form"
+    data-component-group="trips-form"
     data-component="edit"
   >
-    <BeerForm
-      :beer="beer"
-      confirm-trigger-label="Update beer"
-      :is-disabled="true"
+    <TripForm
+      :trip="trip"
+      confirm-trigger-label="Update trip"
+      :is-disabled="!canEditTrip"
       :is-loading="isLoading"
       :on-cancel="onCancel"
       :on-submit="onSubmit"
     >
       <template slot="beforeForm">
         <layout-section-header
-          title="Beer details"
-          :has-trigger="false"
+          title="Trip details"
+          :trigger-label="canEditTrip ? 'Close' : 'Edit trip'"
+          :has-trigger="isTripDriver"
+          @toggle="toggleTripDetails"
         />
       </template>
-    </BeerForm>
+    </TripForm>
   </div>
 </template>
 
 <script>
-  import BeerForm from './AddNew';
+  import TripForm from './AddNew';
+  import { isObj } from '../../../utils';
 
   export default {
     components: {
-      BeerForm
+      TripForm
     },
     props: {
-      beer: {
+      trip: {
         type: Object,
         required: true
       },
@@ -45,6 +48,36 @@
         type: Function,
         default: undefined
       },
+    },
+    data() {
+      return {
+        canEditTrip: false
+      };
+    },
+    computed: {
+      loggedUser() {
+        return this.$store.getters['auth/user'];
+      },
+      hasDriver() {
+        return isObj(this.trip.driver);
+      },
+      isTripDriver() {
+        const { trip, loggedUser, hasDriver } = this;
+
+        return hasDriver && trip.driver.id === loggedUser.id;
+      }
+    },
+    watch: {
+      trip(nextVal) {
+        if (isObj(nextVal)) {
+          this.canEditTrip = false;
+        }
+      }
+    },
+    methods: {
+      toggleTripDetails() {
+        this.canEditTrip = !this.canEditTrip;
+      }
     }
   };
 </script>

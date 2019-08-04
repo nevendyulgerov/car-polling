@@ -11,5 +11,5 @@ export default [{
   label: 'Users',
   paths: ['/users'],
   redirect: '/users',
-  isSelected: true
+  isSelected: false
 }];

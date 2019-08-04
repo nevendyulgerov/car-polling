@@ -1,6 +1,6 @@
 <template>
   <div
-    data-component-group="beers-dialog"
+    data-component-group="trips-dialog"
     data-component="edit"
   >
     <base-edit-dialog
@@ -12,7 +12,7 @@
     >
       <template slot="content">
         <EditTripForm
-          :beer="beer"
+          :trip="trip"
           :is-loading="isLoading"
           :on-cancel="onCancel"
           :on-submit="onConfirm"
@@ -24,14 +24,14 @@
 
 <script>
   import EditTripForm from '../../forms/trips/Edit';
-  import { isStr } from '../../../utils';
+  import dateFormat from '../../../config/dateFormat';
 
   export default {
     components: {
       EditTripForm
     },
     props: {
-      beer: {
+      trip: {
         type: Object,
         required: true
       },
@@ -54,8 +54,8 @@
     },
     computed: {
       title() {
-        const { beer } = this;
-        return isStr(beer.name) ? beer.name : '';
+        const { trip } = this;
+        return `${trip.origin} - ${trip.destination} - ${this.$moment(trip.departureTime).format(dateFormat)}`;
       }
     }
   };
