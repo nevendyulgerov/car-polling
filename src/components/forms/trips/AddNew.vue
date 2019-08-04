@@ -292,7 +292,7 @@
         const trip = {
           carModel,
           message,
-          departureTime: this.$moment(departureTime).format('YYYY-MM-DD[T]HH:mm:ss:sss[Z]'),
+          departureTime: this.$moment(departureTime).format('YYYY-MM-DD[T]HH:mm:ss.sss[Z]'),
           availablePlaces,
           origin,
           destination,
