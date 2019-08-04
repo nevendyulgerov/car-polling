@@ -59,7 +59,7 @@
         type="number"
         step="1"
         min="0"
-        max="100"
+        max="10"
         label="Available places"
         prepend-inner-icon="airline_seat_recline_normal"
         :error-messages="availablePlacesErrors"
