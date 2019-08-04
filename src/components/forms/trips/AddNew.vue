@@ -1,6 +1,6 @@
 <template>
   <div
-    data-component-group="beers-form"
+    data-component-group="trips-form"
     data-component="add-new"
     class="elevation-2"
   >
@@ -8,67 +8,30 @@
 
     <form @:submit.prevent="onSubmit">
       <v-text-field
-        v-model="name"
-        label="Name"
+        v-model="carModel"
+        label="Car model"
         type="text"
         :autofocus="true"
-        :error-messages="nameErrors"
-        @blur="$v.name.$touch()"
-      />
-
-      <v-autocomplete
-        v-model="brewery"
-        :items="breweries"
-        label="Breweries"
-        item-text="name"
-        item-value="brewery_id"
-        :return-object="true"
-        required
-        :readonly="isDisabled"
-        :menu-props="{nudgeBottom:'10'}"
-        :error-messages="breweryErrors"
-        @blur="$v.brewery.$touch()"
-      />
-
-      <v-autocomplete
-        v-model="country"
-        :items="countries"
-        label="Countries"
-        item-text="name"
-        item-value="country_id"
-        :return-object="true"
-        :menu-props="{nudgeBottom:'10'}"
-        :error-messages="countryErrors"
-        @blur="$v.country.$touch()"
-      />
-
-      <v-text-field
-        v-model="abv"
-        label="ABV"
-        type="number"
-        :error-messages="abvErrors"
-        @blur="$v.abv.$touch()"
+        :error-messages="carModelErrors"
+        @blur="$v.carModel.$touch()"
       />
 
       <v-textarea
-        v-model="description"
-        label="Description"
+        v-model="message"
+        label="Message"
       />
 
-      <v-autocomplete
-        v-model="style"
-        :items="styles"
-        label="Style"
-        item-text="name"
-        item-value="style_id"
-        :return-object="true"
-        :menu-props="{nudgeBottom:'10'}"
-      />
-
-      <v-text-field
-        v-model="pictureUrl"
-        label="Picture URL"
-        type="text"
+      <base-date-picker
+        placeholder="Departure time"
+        :date="departureTime"
+        :default-date="defaultDepartureTime"
+        :is-required="true"
+        :is-boxed="false"
+        :config="dateConfig"
+        :is-disabled="isDisabled"
+        :on-blur="$v.departureTime.$touch"
+        :error-messages="departureTimeErrors"
+        :on-change="onChangeDepartureTime"
       />
 
       <div class="form-actions">
@@ -101,32 +64,28 @@
   import { required } from 'vuelidate/lib/validators';
   import { isObj } from '../../../utils';
 
+  const dateFormat = 'DD MMM YYYY HH:mm';
+
   export default {
     mixins: [validationMixin],
     validations() {
       return {
-        name: {
+        carModel: {
           required
         },
-        brewery: {
-          required
-        },
-        country: {
-          required
-        },
-        abv: {
+        departureTime: {
           required
         }
       };
     },
     props: {
-      beer: {
+      trip: {
         type: Object,
         default: undefined
       },
       confirmTriggerLabel: {
         type: String,
-        default: 'Add beer'
+        default: 'Add trip'
       },
       isLoading: {
         type: Boolean,
@@ -147,74 +106,49 @@
     },
     data() {
       return {
-        name: '',
-        brewery: {},
-        country: {},
-        abv: 0,
-        description: '',
-        style: {},
-        pictureUrl: '',
-        countries: [],
-        breweries: [],
-        styles: [],
+        carModel: '',
+        message: '',
+        departureTime: '',
+        defaultDepartureTime: this.$moment().startOf('day').format(dateFormat),
+        dateConfig: {
+          format: 'm/d/Y H:i',
+          altFormat: 'm/d/Y H:i',
+          time_24hr: true,
+          enableTime: true,
+        },
         isSubmitted: false
       };
     },
     computed: {
-      nameErrors() {
+      carModelErrors() {
         const errors = [];
-        if (!this.$v.name.$dirty) {
+        if (!this.$v.carModel.$dirty) {
           return errors;
         }
-        if (!this.$v.name.required) {
-          errors.push('Name is required');
+        if (!this.$v.carModel.required) {
+          errors.push('Car model is required');
         }
         return errors;
       },
-      breweryErrors() {
+      departureTimeErrors() {
         const errors = [];
-        if (!this.$v.brewery.$dirty) {
+        if (!this.$v.departureTime.$dirty) {
           return errors;
         }
-        if (!this.$v.brewery.required) {
-          errors.push('Brewery is required');
-        }
-        return errors;
-      },
-      countryErrors() {
-        const errors = [];
-        if (!this.$v.country.$dirty) {
-          return errors;
-        }
-        if (!this.$v.country.required) {
-          errors.push('Country is required');
-        }
-        return errors;
-      },
-      abvErrors() {
-        const errors = [];
-        if (!this.$v.abv.$dirty) {
-          return errors;
-        }
-        if (!this.$v.abv.required) {
-          errors.push('ABV is required');
+        if (!this.$v.departureTime.required) {
+          errors.push('Departure time is required');
         }
         return errors;
       }
     },
     watch: {
-      beer(nextVal) {
+      trip(nextVal) {
         this.clear();
 
         if (isObj(nextVal)) {
-          this.extractBeerData(nextVal);
+          this.extractTripDate(nextVal);
         }
       }
-    },
-    created() {
-      this.getCountries();
-      this.getBreweries();
-      this.getStyles();
     },
     methods: {
       cancel() {
@@ -228,75 +162,43 @@
           return false;
         }
 
-        this.addBeer();
+        this.addTrip();
       },
       clear() {
         this.$v.$reset();
-        this.name = '';
-        this.brewery = {};
-        this.country = {};
-        this.abv = 0;
-        this.description = '';
-        this.style = {};
-        this.picture = '';
+        this.carModel = '';
+        this.message = '';
+        this.departureTime = '';
         this.isSubmitted = false;
       },
-      getCountries() {
-        return this.$store.dispatch('trips/getCountries')
-          .then((countries) => {
-            this.countries = countries;
-            return countries;
-          });
-      },
-      getBreweries() {
-        return this.$store.dispatch('trips/getBreweries')
-          .then((breweries) => {
-            this.breweries = breweries;
-            return breweries;
-          });
-      },
-      getStyles() {
-        return this.$store.dispatch('trips/getStyles')
-          .then((styles) => {
-            this.styles = styles;
-            return styles;
-          });
-      },
-      addBeer() {
-        const { name, brewery, country, abv, description, style, picture } = this;
+      addTrip() {
+        const { carModel, message, departureTime } = this;
 
-        const beer = {
-          name,
-          brewery,
-          country,
-          abv,
-          description,
-          style,
-          picture
+        const trip = {
+          carModel,
+          message,
+          departureTime
         };
 
-        return this.onSubmit(beer)
+        return this.onSubmit(trip)
           .then(() => this.clear());
       },
       canSubmitRequest() {
-        const { name, brewery, country, abv, isSubmitted } = this;
+        const { carModel, message, departureTime } = this;
 
-        return name !== ''
-          && brewery !== ''
-          && country !== ''
-          && abv > 0
-          && !isSubmitted;
+        return carModel !== ''
+          && message !== ''
+          && departureTime !== '';
       },
-      extractBeerData(beer) {
-        const { name, brewery, country, abv, description, style, picture } = beer;
+      onChangeDepartureTime(departureTime) {
+        this.departureTime = departureTime;
+      },
+      extractTripDate(trip) {
+        const { carModel, message, departureTime } = trip;
 
-        this.name = name;
-        this.brewery = brewery;
-        this.country = country;
-        this.abv = abv;
-        this.description = description;
-        this.style = style;
-        this.picture = picture;
+        this.carModel = carModel;
+        this.message = message;
+        this.departureTime = departureTime;
       }
     }
   };
@@ -305,7 +207,7 @@
 <style lang="stylus" scoped>
   @import '../../../assets/stylus/theme.styl';
 
-  [data-component-group="beers-form"] {
+  [data-component-group="trips-form"] {
     &[data-component="add-new"] {
       padding: 16px;
       border-radius: 2px;

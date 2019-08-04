@@ -9,8 +9,33 @@ export default {
       order = 'asc',
       sort = '',
       origin = '',
-      destination = ''
+      destination = '',
+      departureTime = '',
+      availablePlaces = -1
     } = queryFilters;
+
+    const params = {
+      page,
+      per_page: perPage,
+      order,
+      sort
+    };
+
+    if (origin !== '') {
+      params.origin = origin;
+    }
+
+    if (destination !== '') {
+      params.destination = destination;
+    }
+
+    if (departureTime !== '') {
+      params.departureTime = departureTime;
+    }
+
+    if (availablePlaces > -1) {
+      params.availablePlaces = availablePlaces;
+    }
 
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -92,15 +117,8 @@ export default {
     /*
     return axios({
       method: 'get',
-      params: {
-        page,
-        per_page: perPage,
-        order,
-        sort,
-        origin,
-        destination
-      },
-      url: `${apiUrl}/trips`
+      url: `${apiUrl}/trips`,
+      params,
     });
      */
   },
@@ -139,33 +157,6 @@ export default {
       url: `${apiUrl}/trips/${trip.id}`,
       data: {
         ...query
-      }
-    });
-  },
-  getCountries() {
-    return axios({
-      method: 'get',
-      url: `${apiUrl}/api/countries`,
-      headers: {
-        Authorization: getToken()
-      }
-    });
-  },
-  getBreweries() {
-    return axios({
-      method: 'get',
-      url: `${apiUrl}/api/breweries`,
-      headers: {
-        Authorization: getToken()
-      }
-    });
-  },
-  getStyles() {
-    return axios({
-      method: 'get',
-      url: `${apiUrl}/api/styles`,
-      headers: {
-        Authorization: getToken()
       }
     });
   }

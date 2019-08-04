@@ -6,8 +6,9 @@
       :label="placeholder"
       class="date-time-field"
       prepend-inner-icon="date_range"
-      :background-color="'transparent'"
+      :background-color="backgroundColor"
       :readonly="true"
+      :box="isBoxed"
       :hint="hint"
       :persistent-hint="isPersistentHint"
       :error-messages="errorMessages"
@@ -15,6 +16,17 @@
       @blur="onBlur"
       @focus="toggleDatePicker"
     />
+    <v-btn
+      v-if="hasDate"
+      class="trigger clear-date"
+      flat
+      depressed
+      @click="clearDate"
+    >
+      <v-icon>
+        close
+      </v-icon>
+    </v-btn>
     <flat-pickr
       v-if="!isDisabled"
       ref="datePicker"
@@ -56,7 +68,7 @@
       },
       isBoxed: {
         type: Boolean,
-        default: true
+        default: false
       },
       config: {
         type: Object,
@@ -94,6 +106,14 @@
         isOn: false,
         colors
       };
+    },
+    computed: {
+      backgroundColor() {
+        return this.isBoxed ? colors.grey.lighten3 : 'transparent';
+      },
+      hasDate() {
+        return this.date !== '';
+      }
     },
     watch: {
       dateText(nextDateText) {
@@ -138,12 +158,20 @@
       closeDatePicker() {
         const datePicker = this.getDatePickerInstance();
         datePicker.close();
+      },
+      clearDate() {
+        const datePicker = this.getDatePickerInstance();
+
+        datePicker.clear();
+        this.onChange('');
       }
     }
   };
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+  @import "../assets/stylus/theme.styl";
+
   [data-component="date-picker"] {
     position: relative;
 
@@ -162,6 +190,27 @@
       top: 0;
       left: 0;
       z-index: -1;
+    }
+
+    .v-text-field__details {
+      padding: 0 !important;
+    }
+
+    .trigger.clear-date {
+      position: absolute;
+      top: 8px;
+      right: 0;
+      padding: 0;
+      margin: 0;
+      min-width: auto;
+      width: 23px;
+      height: 23px;
+      min-height: auto;
+      color: $colors.grey.base;
+
+      &:before {
+        background-color: transparent;
+      }
     }
   }
 </style>

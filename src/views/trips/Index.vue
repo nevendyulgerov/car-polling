@@ -1,6 +1,5 @@
 <template>
   <div data-view="trips">
-    <!--
     <AddTripDialog
       :is-on="isAddTripModalOn"
       :is-loading="isAddingTrip"
@@ -8,6 +7,7 @@
       :on-confirm="createTrip"
     />
 
+    <!--
     <EditTripDialog
       :beer="selectedTrip"
       :is-on="isEditTripModalOn"
@@ -32,6 +32,7 @@
           :pagination="pagination"
           :has-custom-items-template="true"
           :can-edit-columns="false"
+          :has-pagination="false"
           :is-loading="isLoading"
           :on-select-item="selectTrip"
           :on-update-pagination="updatePagination"
@@ -48,11 +49,15 @@
             slot="item-cell"
             slot-scope="scope"
           >
-            <div v-if="scope.cell.column.value === 'picture'">
-              <v-img
-                :src="scope.cell.item.picture"
-                class="elevation-2"
-              />
+            <div v-if="isFlag(scope.cell.column.value)">
+              <v-icon
+                :color="scope.cell.item[scope.cell.column.value] ? 'success' : 'error'"
+              >
+                {{ scope.cell.item[scope.cell.column.value] ? 'check' : 'close' }}
+              </v-icon>
+            </div>
+            <div v-else-if="scope.cell.column.value === 'departureTime'">
+              {{ $moment(scope.cell.item.departureTime).format('DD MMM, YYYY HH:mm') }}
             </div>
             <div v-else>
               {{ displayColumnValue(scope.cell.item, scope.cell.column.value) }}
@@ -66,7 +71,7 @@
               @click="toggleNewTripModal"
             >
               <v-icon>
-                local_drink
+                directions_car
               </v-icon>
               {{ 'Add new trip' }}
             </v-btn>
@@ -119,24 +124,28 @@
         return this.trips.length;
       }
     },
-    created() {
-      const { query, pagination } = this;
-      const { sortBy } = pagination;
-
-      this.getTrips({
-        ...query,
-        sort: sortBy
-      });
-    },
     methods: {
-      getTrips({ page = 1, perPage = 15, order = 'asc', sort = '', origin = '', destination = '' } = {}) {
+      getTrips(options = {}) {
+        const {
+          page = 1,
+          perPage = 15,
+          order = 'asc',
+          sort = '',
+          origin = '',
+          destination = '',
+          departureTime = '',
+          availablePlaces = -1
+        } = options;
+
         const query = {
           page,
           perPage,
           order,
           sort,
           origin,
-          destination
+          destination,
+          departureTime,
+          availablePlaces
         };
 
         this.isLoading = true;
@@ -203,7 +212,7 @@
       onFilter(filters) {
         this.query = {
           ...this.query,
-          ...this.getSearchQuery(filters)
+          ...filters
         };
 
         this.getTrips(this.query);
@@ -213,14 +222,6 @@
         this.query = { sort: sortBy };
 
         this.getTrips(this.query);
-      },
-      getSearchQuery({ origin, destination }) {
-        const query = {};
-
-        query.origin = origin;
-        query.destination = destination;
-
-        return query;
       },
       updatePagination({ page, descending, sortBy }) {
         const { query, pagination } = this;
@@ -235,6 +236,11 @@
 
         this.getTrips(nextQuery);
       },
+      isFlag(value) {
+        return value === 'smoking'
+          || value === 'pets'
+          || value === 'luggage';
+      }
     },
     metaInfo() {
       return {

@@ -4,8 +4,8 @@
     data-component="add-new"
   >
     <base-add-dialog
-      icon="local_drink"
-      title="Add new beer"
+      icon="directions_car"
+      title="Add new trip"
       :is-on="isOn"
       :is-fullscreen="false"
       :on-close="onCancel"

@@ -75,7 +75,7 @@
     </v-data-table>
 
     <div
-      v-if="items.length > 0"
+      v-if="hasPagination && items.length > 0"
       class="component-footer"
     >
       <div class="pager">
@@ -134,6 +134,10 @@
       hasReversedActions: {
         type: Boolean,
         default: false
+      },
+      hasPagination: {
+        type: Boolean,
+        default: true
       },
       onChangeColumn: {
         type: Function,

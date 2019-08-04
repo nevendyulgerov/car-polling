@@ -21,6 +21,25 @@
         label="Destination"
         prepend-inner-icon="location_searching"
       />
+
+      <base-date-picker
+        placeholder="Departure time"
+        :date="departureTime"
+        :is-required="true"
+        :is-boxed="false"
+        :config="dateConfig"
+        :on-change="onChangeDepartureTime"
+      />
+
+      <v-text-field
+        v-model="availablePlaces"
+        type="number"
+        step="1"
+        min="0"
+        max="100"
+        label="Available places"
+        prepend-inner-icon="airline_seat_recline_normal"
+      />
     </FiltersForm>
   </div>
 </template>
@@ -38,32 +57,49 @@
     data() {
       return {
         origin: '',
-        destination: ''
+        destination: '',
+        departureTime: '',
+        availablePlaces: '',
+        dateConfig: {
+          format: 'm/d/Y H:i',
+          altFormat: 'm/d/Y H:i',
+          time_24hr: true,
+          enableTime: true,
+        }
       };
     },
     computed: {
       hasFilters() {
-        const { origin, destination } = this;
+        const { origin, destination, departureTime, availablePlaces } = this;
         return origin !== ''
-          && destination !== '';
+          || destination !== ''
+          || departureTime !== ''
+          || availablePlaces !== '';
       }
     },
     methods: {
       onFilter() {
-        const { origin, destination } = this;
+        const { origin, destination, departureTime, availablePlaces } = this;
         const formattedOrigin = stringEscape(origin);
         const formattedDestination = stringEscape(destination);
 
         this.$emit('filter', {
           origin: formattedOrigin,
-          destination: formattedDestination
+          destination: formattedDestination,
+          departureTime,
+          availablePlaces
         });
       },
       onClearFilters() {
         this.origin = '';
         this.destination = '';
+        this.departureTime = '';
+        this.availablePlaces = '';
 
         this.$emit('clearFilters');
+      },
+      onChangeDepartureTime(departureTime) {
+        this.departureTime = departureTime;
       }
     }
   };
