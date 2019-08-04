@@ -3,7 +3,7 @@ import notFoundRoutes from './notFound';
 import loginRoutes from './login';
 import registerRoutes from './register';
 import usersRoutes from './users';
-import beersRoutes from './beers';
+import tripsRoutes from './trips';
 
 export default [
   ...homeRoutes,
@@ -11,5 +11,5 @@ export default [
   ...loginRoutes,
   ...registerRoutes,
   ...usersRoutes,
-  ...beersRoutes
+  ...tripsRoutes
 ];

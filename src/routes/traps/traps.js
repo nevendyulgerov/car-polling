@@ -81,7 +81,7 @@ export const redirectUnauthenticated = (to, from, next) => {
   if (requiresAuth(to) && !isLogged()) {
     next('/login');
   } else if (to.path === '/') {
-    next('/beers');
+    next('/trips');
   } else {
     next();
   }
@@ -109,7 +109,7 @@ export const redirectAuthenticated = (to, from, next) => {
  */
 export const redirectFromIndex = (to, from, next) => {
   if (to.path === '/') {
-    return next('/beers');
+    return next('/trips');
   }
   next();
 };

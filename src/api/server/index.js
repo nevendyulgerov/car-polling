@@ -1,7 +1,7 @@
 import store from '../../store';
 import auth from './auth';
 import users from './users';
-import beers from './beers';
+import trips from './trips';
 
 /**
  * @description Get token
@@ -12,5 +12,5 @@ export const getToken = () => store.getters['auth/authorization'];
 export default {
   auth,
   users,
-  beers
+  trips
 };

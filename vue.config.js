@@ -1,6 +1,6 @@
 const path = require('path');
 
-const api = 'mock';
+const api = 'server';
 const resolve = (dir) => path.resolve(__dirname, dir);
 
 module.exports = {

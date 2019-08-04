@@ -2,7 +2,7 @@ import apiClient from 'api-client';
 import { isObj, isArr } from '../../utils';
 import store from '../../store';
 import initialState from '../initialState';
-import beersServerApi from '../../api/server/beers';
+import tripsApi from '../../api/server/trips';
 
 const beersApi = apiClient.beers;
 
@@ -63,7 +63,7 @@ const handleAlerts = (data, alertType = 'error') => (
 
 const actions = {
   getCategories: () => (
-    beersServerApi.getCategories()
+    tripsApi.getCategories()
   ),
   getBeers: ({ commit, state }, query) => (
     beersApi.getBeers(query).then((res) => {

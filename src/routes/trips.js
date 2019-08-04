@@ -1,7 +1,7 @@
 export default [
   {
-    path: '/beers',
-    name: 'beers',
+    path: '/trips',
+    name: 'trips',
     meta: {
       loadState: true,
       auth: true,
@@ -9,6 +9,6 @@ export default [
       permissions: []
     },
     // route level code-splitting
-    component: () => import(/* webpackChunkName: "users" */ '../views/beers/Index')
+    component: () => import(/* webpackChunkName: "users" */ '../views/trips/Index')
   }
 ];

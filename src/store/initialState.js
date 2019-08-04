@@ -9,7 +9,7 @@ export default {
     items: [],
     itemsMeta: {}
   },
-  beers: {
+  trips: {
     activeItem: {},
     items: [],
     itemsMeta: {}
