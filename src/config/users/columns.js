@@ -12,7 +12,7 @@ export default [{
   isRequired: true
 }, {
   text: 'Avatar',
-  value: 'avatar',
+  value: 'avatarUri',
   isDefault: true,
   isSelected: true,
   isRequired: true

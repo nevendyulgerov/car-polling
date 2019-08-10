@@ -8,13 +8,7 @@
       :on-confirm="updateUser"
     />
 
-    <layout-logged-frame>
-      <template slot="aside">
-        <UserFilters
-          @filter="onFilter"
-          @clearFilters="onClearFilters"
-        />
-      </template>
+    <layout-logged-frame :has-aside="false">
       <template slot="content">
         <base-table
           :columns="columns"
@@ -40,9 +34,9 @@
             slot="item-cell"
             slot-scope="scope"
           >
-            <div v-if="scope.cell.column.value === 'avatar'">
+            <div v-if="scope.cell.column.value === 'avatarUri'">
               <v-img
-                :src="scope.cell.item.avatar"
+                :src="scope.cell.item.avatarUri"
                 cover
                 class="user-avatar grey lighten-2 elevation-1"
               />
@@ -58,7 +52,6 @@
 </template>
 
 <script>
-  import UserFilters from '../../components/forms/filters/Users';
   import EditUserDialog from '../../components/dialogs/user/Edit';
   import { extractNestedProp, isStr } from '../../utils';
   import columns from '../../config/users/columns';
@@ -66,7 +59,6 @@
 
   export default {
     components: {
-      UserFilters,
       EditUserDialog
     },
     data() {
