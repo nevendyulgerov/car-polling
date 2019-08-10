@@ -22,6 +22,7 @@ export default {
       params.search = search;
     }
 
+    /*
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -39,14 +40,13 @@ export default {
         });
       });
     });
+     */
 
-    /*
     return axios({
       method: 'get',
-      url: `${apiUrl}/users`,
+      url: `${apiUrl}/users/all`,
       params
     });
-     */
   },
   getUser(id) {
     const query = getAccessQuery();
