@@ -41,6 +41,14 @@
                 class="user-avatar grey lighten-2 elevation-1"
               />
             </div>
+            <div v-else-if="scope.cell.column.value === 'email'">
+              <a
+                :href="`mailto:${scope.cell.item.email}`"
+                target="_blank"
+              >
+                {{ scope.cell.item.email }}
+              </a>
+            </div>
             <div v-else>
               {{ displayColumnValue(scope.cell.item, scope.cell.column.value) }}
             </div>

@@ -11,6 +11,18 @@ export default [{
   isSelected: true,
   isRequired: true
 }, {
+  text: 'Email',
+  value: 'email',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Phone',
+  value: 'phone',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
   text: 'Avatar',
   value: 'avatarUri',
   isDefault: true,
