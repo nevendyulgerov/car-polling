@@ -168,13 +168,13 @@
     },
     methods: {
       setUserDetails() {
-        const { firstName, lastName, email, phone, avatar } = this.$store.getters['auth/user'];
+        const { firstName, lastName, email, phone, avatarUri } = this.$store.getters['auth/user'];
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.avatar = avatar !== '' ? avatar : this.placeholder;
+        this.avatar = avatarUri !== '' ? avatarUri : this.placeholder;
       },
       submit() {
         this.$v.$touch();
