@@ -165,6 +165,25 @@
             return err;
           });
       },
+      filterTrips(options = {}) {
+        const { origin = '', destination = '' } = options;
+
+        const query = {
+          origin,
+          destination
+        };
+
+        this.isLoading = true;
+        return this.$store.dispatch('trips/filterTrips', query)
+          .then((res) => {
+            this.isLoading = false;
+            return res;
+          })
+          .catch((err) => {
+            this.isLoading = false;
+            return err;
+          });
+      },
       selectTrip(trip) {
         this.selectedTrip = trip;
         this.toggleEditTripModal();
@@ -216,7 +235,7 @@
           ...filters
         };
 
-        this.getTrips(this.query);
+        this.filterTrips(this.query);
       },
       onClearFilters() {
         const { sortBy } = this.pagination;

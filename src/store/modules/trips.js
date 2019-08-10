@@ -79,6 +79,22 @@ const actions = {
       return nextItemsData;
     })
   ),
+  filterTrips: ({ commit, state }, query) => (
+    tripsApi.filterTrips(query).then((res) => {
+      const nextItemsData = {
+        items: res.data
+      };
+
+      const nextState = {
+        ...state,
+        ...nextItemsData
+      };
+
+      commit('SET', nextState);
+
+      return nextItemsData;
+    })
+  ),
   getTrip: ({ commit, state }, query) => (
     tripsApi.getTrip(query).then((res) => {
       const { activeItem } = state;

@@ -122,6 +122,25 @@ export default {
     });
      */
   },
+  filterTrips(queryFilters = {}) {
+    const { origin = '', destination = '' } = queryFilters;
+
+    const params = {};
+
+    if (origin !== '') {
+      params.origin = origin;
+    }
+
+    if (destination !== '') {
+      params.destination = destination;
+    }
+
+    return axios({
+      method: 'get',
+      url: `${apiUrl}/trips`,
+      params
+    });
+  },
   createTrip(trip) {
     console.warn('createTrip::');
     console.log(trip);
