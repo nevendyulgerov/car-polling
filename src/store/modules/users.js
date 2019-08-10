@@ -108,8 +108,14 @@ const actions = {
       return nextUser;
     })
   ),
-  updateUser: ({ commit, state }, user) => (
-    usersApi.updateUser(user).then((res) => {
+  updateUser: ({ commit, state }, user) => {
+    const { password, ...restUser } = store.getters['auth/user'];
+    const query = {
+      ...restUser,
+      ...user
+    };
+
+    return usersApi.updateUser(query).then((res) => {
       const { activeItem } = state;
       const nextUser = res.data;
 
@@ -130,8 +136,8 @@ const actions = {
       }, 'success');
 
       return nextUser;
-    })
-  ),
+    });
+  },
   setActiveUser: ({ commit, state }, user) => {
     const nextState = {
       ...state,
