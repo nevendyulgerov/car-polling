@@ -26,7 +26,21 @@
         color="secondary"
         dark
       >
-        <v-icon class="icon-avatar">
+        <div
+          v-if="hasAvatar"
+          class="avatar-box"
+        >
+          <v-img
+            :src="loggedUser.avatarUri"
+            :lazy-src="loggedUser.avatarUri"
+            class="grey lighten-2 elevation-1"
+            cover
+          />
+        </div>
+        <v-icon
+          v-else
+          class="icon-avatar"
+        >
           account_circle
         </v-icon>
         <span class="user-name">
@@ -60,7 +74,7 @@
 
 <script>
   import menuItems from '../config/components/userMenu';
-  import { isObj } from '../utils';
+  import { isStr } from '../utils';
 
   // TODO: Translate component
 
@@ -86,16 +100,14 @@
         });
       },
       loggedUser() {
-        const user = this.$store.getters['auth/user'];
-        return isObj(user) ? user : {
-          id: '',
-          firstName: '',
-          lastName: ''
-        };
+        return this.$store.getters['auth/user'];
       },
       userName() {
         const { firstName, lastName } = this.loggedUser;
         return `${firstName} ${lastName}`;
+      },
+      hasAvatar() {
+        return isStr(this.loggedUser.avatarUri) && this.loggedUser.avatarUri !== '';
       }
     },
     created() {
@@ -224,6 +236,20 @@
 
       @media (max-width: $grid-breakpoints.md) {
         font-size: 12px;
+      }
+
+      .avatar-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 8px 0 0;
+
+        .v-image {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          flex: inherit;
+        }
       }
     }
   }
