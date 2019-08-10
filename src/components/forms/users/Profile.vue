@@ -204,7 +204,7 @@
         };
 
         if (avatar !== '' && avatar !== placeholder) {
-          userProfile.avatar = avatar;
+          userProfile.avatar_uri = avatar;
         }
 
         this.onSubmit(userProfile);
