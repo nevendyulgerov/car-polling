@@ -69,11 +69,9 @@ export default {
     });
   },
   updateUser(user) {
-    const query = getAccessQuery();
-
     return axios({
       method: 'put',
-      url: `${apiUrl}/users/${user.id}${query}`,
+      url: `${apiUrl}/users`,
       data: {
         ...user
       }

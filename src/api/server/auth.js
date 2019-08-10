@@ -7,18 +7,13 @@ export default {
       setTimeout(() => {
         resolve({
           data: {
-            Authorization: 'dummy-authorization',
-            Role: 'dummy-role',
-            User: {
-              id: 1,
-              firstName: 'John',
-              lastName: 'Doe',
-              email: 'john.doe@email.com',
-              avatar: '',
-              phone: '98782839718',
-              rating: 6.5
-            },
-            message: 'Welcome to Carpooling!'
+            id: 1,
+            firstName: 'John',
+            lastName: 'Doe',
+            email: 'john.doe@email.com',
+            avatar: '',
+            phone: '98782839718',
+            rating: 6.5
           }
         });
       }, 500);

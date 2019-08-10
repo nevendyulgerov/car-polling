@@ -21,8 +21,8 @@
       return {};
     },
     methods: {
-      onUpdateUser() {
-
+      onUpdateUser(user) {
+        return this.$store.dispatch('users/updateUser', user);
       }
     },
     metaInfo() {

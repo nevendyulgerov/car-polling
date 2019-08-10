@@ -203,7 +203,7 @@
           phone,
         };
 
-        if (avatar) {
+        if (avatar !== '' && avatar !== placeholder) {
           userProfile.avatar = avatar;
         }
 
