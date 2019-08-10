@@ -1,7 +1,5 @@
 export default {
   auth: {
-    authorization: null,
-    role: null,
     user: null
   },
   users: {

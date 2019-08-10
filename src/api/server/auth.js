@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken, apiUrl } from '../../utils/serverApi';
 
 export default {
-  login() {
+  fakeLogin() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
@@ -22,6 +22,21 @@ export default {
           }
         });
       }, 500);
+    });
+  },
+  login({ email, password }) {
+    const data = {
+      email,
+      password
+    };
+
+    return axios({
+      method: 'post',
+      url: `${apiUrl}/users/login`,
+      data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
   },
   logout() {

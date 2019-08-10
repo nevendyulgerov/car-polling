@@ -7,6 +7,7 @@
       <v-text-field
         v-model="email"
         label="Email"
+        readonly
         required
         :error-messages="emailErrors"
         @blur="$v.email.$touch()"
@@ -73,12 +74,9 @@
 
 <script>
   import { validationMixin } from 'vuelidate';
-  import { required, minLength, email } from 'vuelidate/lib/validators';
+  import { required, email } from 'vuelidate/lib/validators';
   import Form from '../Form';
-  import { config, hasLowercase, hasUppercase, hasSpecialSymbol } from '../../../validators/password';
   import placeholder from '../../../assets/images/placeholder.png';
-
-  const pass = { ...config };
 
   export default {
     components: {
@@ -98,13 +96,6 @@
       },
       phone: {
         required
-      },
-      password: {
-        required,
-        minLength: minLength(pass.length),
-        hasLowercase,
-        hasUppercase,
-        hasSpecialSymbol
       }
     },
     props: {
@@ -192,7 +183,7 @@
           return false;
         }
 
-        this.registerUser();
+        this.updateUser();
       },
       clear() {
         this.$v.$reset();
@@ -200,30 +191,31 @@
         this.firstName = '';
         this.lastName = '';
         this.phone = '';
-        this.password = '';
         this.isSubmitted = false;
       },
-      registerUser() {
-        const { email, firstName, lastName, phone, password } = this;
+      updateUser() {
+        const { email, firstName, lastName, phone, avatar } = this;
 
         const userProfile = {
           email,
           firstName,
           lastName,
           phone,
-          password
         };
+
+        if (avatar) {
+          userProfile.avatar = avatar;
+        }
 
         this.onSubmit(userProfile);
       },
       canSubmitRequest() {
-        const { email, firstName, lastName, phone, password } = this;
+        const { email, firstName, lastName, phone } = this;
 
         return email !== ''
           && firstName !== ''
           && lastName !== ''
           && phone !== ''
-          && password !== ''
           && !this.isSubmitted;
       },
       onFilterFile(file) {
@@ -233,7 +225,6 @@
         this.avatarFile = file;
 
         this.loadImageFile(file.file, (result) => {
-          this.avatar = file.name;
           this.avatar = result;
         });
       },
@@ -244,7 +235,7 @@
         fr.addEventListener('load', () => {
           callback(fr.result);
         });
-      },
+      }
     },
   };
 </script>

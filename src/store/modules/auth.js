@@ -13,8 +13,6 @@ const authApi = apiClient.auth;
  * @returns {boolean}
  */
 const isValid = (auth) => isObj(auth)
-  && isNull(auth.authorization)
-  && isNull(auth.role)
   && isNull(auth.user);
 
 /**
@@ -40,8 +38,6 @@ const initState = initialState => {
  * @type {*}
  */
 export const getters = {
-  authorization: ({ authorization }) => authorization,
-  role: ({ role }) => role,
   user: ({ user }) => user,
   isLogged: ({ user }) => isObj(user),
   isAuthorized: ({ permissions = [] }) => (requestedPermissions = []) => (
@@ -64,12 +60,10 @@ const handleAlerts = (data, alertType = 'error') => (
 const actions = {
   login: ({ commit, state }, userAuth) => (
     authApi.login(userAuth).then((res) => {
-      const { Authorization, Role, User } = res.data;
+      const nextUser = res.data;
       const nextAuth = {
         ...state,
-        authorization: Authorization,
-        role: Role,
-        user: User
+        user: nextUser
       };
 
       commit('SET', nextAuth);
@@ -108,8 +102,6 @@ const actions = {
 
 const mutations = {
   SET(state, auth) {
-    state.authorization = auth.authorization;
-    state.role = auth.role;
     state.user = auth.user;
   }
 };
