@@ -127,6 +127,8 @@ const actions = {
         }
       };
 
+      store.dispatch('auth/setUser', nextUser);
+
       commit('SET', nextState);
 
       handleAlerts({

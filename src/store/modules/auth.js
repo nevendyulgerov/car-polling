@@ -86,6 +86,19 @@ const actions = {
       return handleAlerts(res.data, 'success');
     })
   ),
+  setUser: ({ state, commit }, user) => {
+    const nextUser = {
+      ...state.user,
+      ...user
+    };
+
+    const nextState = {
+      ...state,
+      user: nextUser
+    };
+
+    commit('SET', nextState);
+  },
   reset: ({ commit }) => (
     commit('SET', initialState.auth)
   ),
