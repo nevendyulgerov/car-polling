@@ -68,8 +68,6 @@ const actions = {
       };
 
       commit('SET', nextAuth);
-
-      return router.replace({ name: 'index' });
     })
   ),
   me: ({ commit, state }) => (
@@ -82,7 +80,7 @@ const actions = {
 
       commit('SET', nextAuth);
 
-      return nextUser;
+      return router.replace({ name: 'index' });
     })
   ),
   getUserAvatar: ({ commit, state }, query) => (
@@ -96,9 +94,7 @@ const actions = {
         }
       };
 
-      commit('SET', nextAuth);
-
-      return avatar;
+      return commit('SET', nextAuth);
     })
   ),
   register: (context, user) => (

@@ -6,7 +6,9 @@ export default {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          idToken: 'abdasd'
+          data: {
+            idToken: 'abdasd'
+          }
         });
       }, 500);
     });
@@ -30,9 +32,11 @@ export default {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve({
-          id: 1,
-          firstName: 'John',
-          lastName: 'Doe'
+          data: {
+            id: 1,
+            firstName: 'John',
+            lastName: 'Doe'
+          }
         });
       }, 500);
     });
@@ -45,6 +49,15 @@ export default {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${getToken()}`
       }
+    });
+  },
+  fakeGetUserAvatar() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          data: 'https://www.alessandromichelazzi.com/wp-content/uploads/2018/02/google-pixel-2-sample-photos-Cover-1.jpg'
+        });
+      }, 500);
     });
   },
   getUserAvatar({ id }) {
