@@ -26,10 +26,9 @@ const initState = initialState => {
     throw Error('Invalid initial auth state');
   }
 
-  const { authorization, role, user } = initialState;
+  const { authorization, user } = initialState;
   return {
     authorization,
-    role,
     user
   };
 };

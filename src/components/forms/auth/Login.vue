@@ -128,7 +128,7 @@
             this.isLoading = false;
             return res;
           })
-          .then(() => this.getLoggedUser().then(this.getUserAvatar))
+//          .then(() => this.getLoggedUser().then(this.getUserAvatar))
           .catch(() => {
             this.isLoading = false;
             this.isSubmitted = false;

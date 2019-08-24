@@ -2,6 +2,15 @@ import axios from 'axios';
 import { getToken, apiUrl } from '../../utils/serverApi';
 
 export default {
+  fakeLogin() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          idToken: 'abdasd'
+        });
+      }, 500);
+    });
+  },
   login({ email, password }) {
     const data = {
       email,
@@ -15,6 +24,17 @@ export default {
       headers: {
         'Content-Type': 'application/json'
       }
+    });
+  },
+  fakeMe() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          id: 1,
+          firstName: 'John',
+          lastName: 'Doe'
+        });
+      }, 500);
     });
   },
   me() {
