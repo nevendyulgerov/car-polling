@@ -2,23 +2,6 @@ import axios from 'axios';
 import { getToken, apiUrl } from '../../utils/serverApi';
 
 export default {
-  fakeLogin() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          data: {
-            id: 1,
-            firstName: 'John',
-            lastName: 'Doe',
-            email: 'john.doe@email.com',
-            avatar: '',
-            phone: '98782839718',
-            rating: 6.5
-          }
-        });
-      }, 500);
-    });
-  },
   login({ email, password }) {
     const data = {
       email,
@@ -34,6 +17,26 @@ export default {
       }
     });
   },
+  me() {
+    return axios({
+      method: 'get',
+      url: `${apiUrl}/users/me`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+  },
+  getUserAvatar({ id }) {
+    return axios({
+      method: 'get',
+      url: `${apiUrl}/users/${id}/avatar`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+  },
   logout() {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -45,9 +48,8 @@ export default {
       }, 500);
     });
   },
-  register({ username, firstName, lastName, email, phone, password }) {
+  register({ firstName, lastName, email, phone, password }) {
     const data = {
-      username,
       firstName,
       lastName,
       email,

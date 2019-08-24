@@ -1,7 +1,7 @@
 import apiClient from 'api-client';
 import router from '../../router';
 import initialState from '../initialState';
-import { isObj, isNull } from '../../utils';
+import { isObj, isNull, isStr } from '../../utils';
 import store from '../../store';
 import isAuthorized from '../../utils/authorization';
 
@@ -13,7 +13,8 @@ const authApi = apiClient.auth;
  * @returns {boolean}
  */
 const isValid = (auth) => isObj(auth)
-  && isNull(auth.user);
+  && isNull(auth.user)
+  && isStr(auth.authorization);
 
 /**
  * @description Init state
@@ -60,7 +61,20 @@ const handleAlerts = (data, alertType = 'error') => (
 const actions = {
   login: ({ commit, state }, userAuth) => (
     authApi.login(userAuth).then((res) => {
-      const nextUser = res.data;
+      const nextAuthorization = res.idToken;
+      const nextAuth = {
+        ...state,
+        authorization: nextAuthorization
+      };
+
+      commit('SET', nextAuth);
+
+      return router.replace({ name: 'index' });
+    })
+  ),
+  me: ({ commit, state }) => (
+    authApi.me().then((res) => {
+      const nextUser = res;
       const nextAuth = {
         ...state,
         user: nextUser
@@ -68,7 +82,23 @@ const actions = {
 
       commit('SET', nextAuth);
 
-      return router.replace({ name: 'index' });
+      return nextUser;
+    })
+  ),
+  getUserAvatar: ({ commit, state }, query) => (
+    authApi.getUserAvatar(query).then((res) => {
+      const avatar = res;
+      const nextAuth = {
+        ...state,
+        user: {
+          ...state.user,
+          avatar
+        }
+      };
+
+      commit('SET', nextAuth);
+
+      return avatar;
     })
   ),
   register: (context, user) => (
@@ -116,6 +146,7 @@ const actions = {
 const mutations = {
   SET(state, auth) {
     state.user = auth.user;
+    state.authorization = auth.authorization;
   }
 };
 

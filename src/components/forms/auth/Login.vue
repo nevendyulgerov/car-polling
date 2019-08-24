@@ -125,10 +125,14 @@
             this.isLoading = false;
             return res;
           })
+          .then(this.getLoggedUser)
           .catch(() => {
             this.isLoading = false;
             this.isSubmitted = false;
           });
+      },
+      getLoggedUser() {
+        return this.$store.dispatch('auth/me');
       },
       canSubmitRequest() {
         return this.email !== ''

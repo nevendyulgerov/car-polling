@@ -1,5 +1,4 @@
 import store from '../store';
-import { hasProp } from './index';
 
 /**
  * @description Api url
