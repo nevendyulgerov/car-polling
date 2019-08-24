@@ -1,7 +1,7 @@
 import apiClient from 'api-client';
 import router from '../../router';
 import initialState from '../initialState';
-import { isObj, isNull, isStr } from '../../utils';
+import { isObj, isNum, isStr } from '../../utils';
 import store from '../../store';
 import isAuthorized from '../../utils/authorization';
 
@@ -13,7 +13,7 @@ const authApi = apiClient.auth;
  * @returns {boolean}
  */
 const isValid = (auth) => isObj(auth)
-  && isNull(auth.user)
+  && isObj(auth.user)
   && isStr(auth.authorization);
 
 /**
@@ -40,7 +40,8 @@ const initState = initialState => {
  */
 export const getters = {
   user: ({ user }) => user,
-  isLogged: ({ user }) => isObj(user),
+  authorization: ({ authorization }) => authorization,
+  isLogged: ({ user }) => isObj(user) && isNum(user.id),
   isAuthorized: ({ permissions = [] }) => (requestedPermissions = []) => (
     isAuthorized(permissions, requestedPermissions)
   )

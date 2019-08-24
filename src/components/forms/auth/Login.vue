@@ -72,6 +72,9 @@
       };
     },
     computed: {
+      loggedUser() {
+        return this.$store.getters['auth/user'];
+      },
       emailErrors() {
         const errors = [];
         if (!this.$v.email.$dirty) {
@@ -125,7 +128,7 @@
             this.isLoading = false;
             return res;
           })
-          .then(this.getLoggedUser)
+          .then(this.getLoggedUser.then(this.getUserAvatar))
           .catch(() => {
             this.isLoading = false;
             this.isSubmitted = false;
@@ -133,6 +136,13 @@
       },
       getLoggedUser() {
         return this.$store.dispatch('auth/me');
+      },
+      getUserAvatar() {
+        const query = {
+          id: this.loggedUser.id
+        };
+
+        return this.$store.dispatch('auth/getUserAvatar', query);
       },
       canSubmitRequest() {
         return this.email !== ''

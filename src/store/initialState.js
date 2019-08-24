@@ -1,7 +1,7 @@
 export default {
   auth: {
     authorization: '',
-    user: null
+    user: {}
   },
   users: {
     activeItem: {},
