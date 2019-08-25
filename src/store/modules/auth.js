@@ -85,12 +85,7 @@ const actions = {
   ),
   getUserAvatar: ({ commit, state }, query) => (
     authApi.getUserAvatar(query).then((res) => {
-      const avatar = btoa(
-        new Uint8Array(res.data).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          '',
-        ),
-      );
+      const avatar = res.data;
       const nextAuth = {
         ...state,
         user: {
