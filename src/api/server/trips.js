@@ -34,7 +34,10 @@ export default {
       const [earliestDepartureTime, latestDepartureTime] = departureDates.split(' - ');
 
       params.earliestDepartureTime = moment(earliestDepartureTime).format('YYYY-MM-DD[T]HH:mm:ss');
-      params.latestDepartureTime = moment(latestDepartureTime).format('YYYY-MM-DD[T]HH:mm:ss');
+
+      if (latestDepartureTime) {
+        params.latestDepartureTime = moment(latestDepartureTime).format('YYYY-MM-DD[T]HH:mm:ss');
+      }
     }
 
     if (availablePlaces > -1) {
