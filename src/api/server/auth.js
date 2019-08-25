@@ -64,6 +64,7 @@ export default {
     return axios({
       method: 'get',
       url: `${apiUrl}/users/${id}/avatar`,
+      responseType: 'arraybuffer',
       headers: {
         'Content-Type': 'image/jpeg',
         Authorization: `Bearer ${getToken()}`
