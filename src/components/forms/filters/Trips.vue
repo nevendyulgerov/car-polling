@@ -48,7 +48,11 @@
         destination: '',
         departureDates: '',
         dateConfig: {
-          mode: 'range'
+          mode: 'range',
+          format: 'Y-m-d H:i',
+          altFormat: 'Y-m-d H:i',
+          time_24hr: true,
+          enableTime: true
         },
       };
     },

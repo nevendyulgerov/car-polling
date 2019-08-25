@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import { getToken, getAccessQuery, apiUrl } from '../../utils/serverApi';
 
 export default {
@@ -32,8 +33,8 @@ export default {
     if (departureDates !== '') {
       const [earliestDepartureTime, latestDepartureTime] = departureDates.split(' - ');
 
-      params.earliestDepartureTime = earliestDepartureTime;
-      params.latestDepartureTime = latestDepartureTime;
+      params.earliestDepartureTime = moment(earliestDepartureTime).format('YYYY-MM-DD[T]HH:mm:ss');
+      params.latestDepartureTime = moment(latestDepartureTime).format('YYYY-MM-DD[T]HH:mm:ss');
     }
 
     if (availablePlaces > -1) {
