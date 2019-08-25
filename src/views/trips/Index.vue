@@ -250,6 +250,11 @@
         this.getTrips(this.query);
       },
       updatePagination({ page, descending, sortBy }) {
+        console.warn('updatePagination::');
+        console.log(page);
+        console.log(descending);
+        console.log(sortBy);
+
         const { query, pagination } = this;
         const nextQuery = {
           ...query,

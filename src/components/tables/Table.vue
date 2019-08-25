@@ -174,7 +174,7 @@
       firstItemIndex() {
         const { page, rowsPerPage } = this.pagination;
         const nextPage = page + 1;
-        
+
         return (nextPage * rowsPerPage) - (rowsPerPage - 1);
       },
       lastItemIndex() {
