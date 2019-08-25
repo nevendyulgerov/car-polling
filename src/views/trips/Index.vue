@@ -182,7 +182,7 @@
             this.isLoading = false;
             this.pagination.page = itemsMeta.number;
             this.pagination.totalItems = itemsMeta.totalElements;
-            this.totalPages = itemsMeta.totalPages;
+            this.totalPages = itemsMeta.totalPages - 1;
 
             return res;
           })
