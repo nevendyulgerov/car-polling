@@ -45,7 +45,10 @@ export default {
     return axios({
       method: 'get',
       url: `${apiUrl}/users/all`,
-      params
+      params,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
     });
   },
   getUser(id) {
