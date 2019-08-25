@@ -6,7 +6,7 @@ export default {
   getTrips(queryFilters = {}) {
     const {
       driver = '',
-      page = 0,
+      page = 1,
       perPage = 15,
       order = 'asc',
       sort = '',
@@ -20,7 +20,7 @@ export default {
     } = queryFilters;
 
     const params = {
-      page,
+      page: page - 1,
       size: perPage,
       order,
       sort,

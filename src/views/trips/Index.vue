@@ -112,7 +112,7 @@
         columns,
         pagination: {
           descending: true,
-          page: 0,
+          page: 1,
           rowsPerPage: 15,
           sortBy: 'origin',
           totalItems: 0,
@@ -141,7 +141,7 @@
       getTrips(options = {}) {
         const {
           driver = '',
-          page = 0,
+          page = 1,
           perPage = 15,
           order = 'asc',
           sort = '',
