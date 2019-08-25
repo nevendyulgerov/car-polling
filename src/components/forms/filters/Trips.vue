@@ -81,9 +81,9 @@
         departureDates: '',
         availablePlaces: '',
         driver: {},
-        smoking: false,
-        luggage: false,
-        pets: false,
+        smoking: '',
+        luggage: '',
+        pets: '',
         dateConfig: {
           mode: 'range',
           format: 'Y-m-d H:i',
@@ -137,9 +137,9 @@
         this.destination = '';
         this.availablePlaces = '';
         this.departureDates = '';
-        this.smoking = false;
-        this.luggage = false;
-        this.pets = false;
+        this.smoking = '';
+        this.luggage = '';
+        this.pets = '';
         this.driver = {};
 
         this.$emit('clearFilters');

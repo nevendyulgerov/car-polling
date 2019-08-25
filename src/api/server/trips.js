@@ -14,9 +14,9 @@ export default {
       destination = '',
       departureDates = '',
       availablePlaces = -1,
-      smoking,
-      luggage,
-      pets,
+      smoking = '',
+      luggage = '',
+      pets = '',
     } = queryFilters;
 
     const params = {
@@ -24,9 +24,6 @@ export default {
       size: perPage,
       order,
       sort,
-      smoking,
-      luggage,
-      pets
     };
 
     if (origin !== '') {
@@ -53,6 +50,18 @@ export default {
 
     if (driver > -1) {
       params.driver = driver;
+    }
+
+    if (smoking !== '') {
+      params.smoking = smoking;
+    }
+
+    if (luggage !== '') {
+      params.luggage = luggage;
+    }
+
+    if (pets !== '') {
+      params.pets = pets;
     }
 
     return axios({

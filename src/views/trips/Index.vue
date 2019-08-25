@@ -136,9 +136,9 @@
           destination = '',
           departureDates = '',
           availablePlaces = -1,
-          smoking = false,
-          luggage = false,
-          pets = false
+          smoking = '',
+          luggage = '',
+          pets = ''
         } = options;
 
         const query = {
