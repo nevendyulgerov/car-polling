@@ -90,7 +90,7 @@ const actions = {
         ...state,
         user: {
           ...state.user,
-          avatar
+          avatarUri: avatar
         }
       };
 

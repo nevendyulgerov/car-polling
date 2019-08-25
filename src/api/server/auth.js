@@ -65,7 +65,7 @@ export default {
       method: 'get',
       url: `${apiUrl}/users/${id}/avatar`,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'image/jpeg',
         Authorization: `Bearer ${getToken()}`
       }
     });
