@@ -127,7 +127,7 @@
     methods: {
       getTrips(options = {}) {
         const {
-          driver = -1,
+          driver = '',
           page = 0,
           perPage = 15,
           order = 'asc',

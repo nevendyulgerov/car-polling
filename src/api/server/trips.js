@@ -5,7 +5,7 @@ import { getToken, getAccessQuery, apiUrl } from '../../utils/serverApi';
 export default {
   getTrips(queryFilters = {}) {
     const {
-      driver = -1,
+      driver = '',
       page = 0,
       perPage = 15,
       order = 'asc',
@@ -48,7 +48,7 @@ export default {
       params.availablePlaces = availablePlaces;
     }
 
-    if (driver > -1) {
+    if (driver > '') {
       params.driver = driver;
     }
 
