@@ -30,7 +30,6 @@
           :pagination="pagination"
           :has-custom-items-template="true"
           :can-edit-columns="false"
-          :has-pagination="false"
           :is-loading="isLoading"
           :on-select-item="selectTrip"
           :on-update-pagination="updatePagination"
