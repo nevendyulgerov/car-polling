@@ -1,7 +1,7 @@
 import apiClient from 'api-client';
 import router from '../../router';
 import initialState from '../initialState';
-import { isObj, isNum, isStr } from '../../utils';
+import { isObj, isNum, isStr, arrayBufferToBase64 } from '../../utils';
 import store from '../../store';
 import isAuthorized from '../../utils/authorization';
 
@@ -85,7 +85,7 @@ const actions = {
   ),
   getUserAvatar: ({ commit, state }, query) => (
     authApi.getUserAvatar(query).then((res) => {
-      const avatar = res.data;
+      const avatar = arrayBufferToBase64(res.data);
       const nextAuth = {
         ...state,
         user: {
