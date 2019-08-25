@@ -20,7 +20,7 @@ export default {
     } = queryFilters;
 
     const params = {
-      page: page - 1,
+      page,
       size: perPage,
       order,
       sort,
