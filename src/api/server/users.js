@@ -19,28 +19,8 @@ export default {
     };
 
     if (search !== '') {
-      params.search = search;
+      params.username = search;
     }
-
-    /*
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          data: [{
-            id: 1,
-            firstName: 'John',
-            lastName: 'Doe',
-            avatar: 'https://www.alessandromichelazzi.com/wp-content/uploads/2018/02/google-pixel-2-sample-photos-Cover-1.jpg'
-          }, {
-            id: 2,
-            firstName: 'Jane',
-            lastName: 'Due',
-            avatar: 'https://i.ytimg.com/vi/XGSIU39Y7WU/maxresdefault.jpg'
-          }]
-        });
-      });
-    });
-     */
 
     return axios({
       method: 'get',

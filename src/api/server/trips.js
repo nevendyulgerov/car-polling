@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-import { getToken, getAccessQuery, apiUrl } from '../../utils/serverApi';
+import { getToken, apiUrl } from '../../utils/serverApi';
 
 export default {
   getTrips(queryFilters = {}) {
@@ -49,7 +49,7 @@ export default {
     }
 
     if (driver > '') {
-      params.driver = driver;
+      params.username = driver;
     }
 
     if (smoking !== '') {
