@@ -8,7 +8,13 @@
       :on-confirm="updateUser"
     />
 
-    <layout-logged-frame :has-aside="false">
+    <layout-logged-frame>
+      <template slot="aside">
+        <UserFilters
+          @filter="onFilter"
+          @clearFilters="onClearFilters"
+        />
+      </template>
       <template slot="content">
         <base-table
           :columns="columns"
@@ -61,13 +67,15 @@
 
 <script>
   import EditUserDialog from '../../components/dialogs/user/Edit';
+  import UserFilters from '../../components/forms/filters/Users';
   import { extractNestedProp, isStr } from '../../utils';
   import columns from '../../config/users/columns';
   import dateFormat from '../../config/dateFormat';
 
   export default {
     components: {
-      EditUserDialog
+      EditUserDialog,
+      UserFilters
     },
     data() {
       return {
