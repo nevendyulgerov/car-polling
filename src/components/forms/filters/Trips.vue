@@ -24,7 +24,7 @@
 
       <base-date-picker
         :date="departureDates"
-        placeholder="Dates"
+        placeholder="Departure dates"
         :config="dateConfig"
         :on-change="onChangeDepartureDate"
       />
