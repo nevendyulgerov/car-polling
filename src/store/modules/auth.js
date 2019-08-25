@@ -89,7 +89,7 @@ const actions = {
         ...state,
         user: {
           ...state.user,
-          avatarUri: res.data
+          avatarUri: `data:image/png;base64,${res.data}`
         }
       };
 
