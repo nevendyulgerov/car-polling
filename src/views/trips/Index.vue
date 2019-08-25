@@ -127,7 +127,7 @@
     methods: {
       getTrips(options = {}) {
         const {
-          page = 1,
+          page = 0,
           perPage = 15,
           order = 'asc',
           sort = '',
@@ -157,26 +157,12 @@
 
         return this.$store.dispatch('trips/getTrips', query)
           .then((res) => {
+            const { itemsMeta } = res;
             this.isLoading = false;
-            return res;
-          })
-          .catch((err) => {
-            this.isLoading = false;
-            return err;
-          });
-      },
-      filterTrips(options = {}) {
-        const { origin = '', destination = '' } = options;
+            this.pagination.page = itemsMeta.number;
+            this.pagination.totalItems = itemsMeta.totalElements;
+            this.totalPages = itemsMeta.totalPages;
 
-        const query = {
-          origin,
-          destination
-        };
-
-        this.isLoading = true;
-        return this.$store.dispatch('trips/filterTrips', query)
-          .then((res) => {
-            this.isLoading = false;
             return res;
           })
           .catch((err) => {

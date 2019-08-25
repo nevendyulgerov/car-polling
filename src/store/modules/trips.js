@@ -66,7 +66,13 @@ const actions = {
   getTrips: ({ commit, state }, query) => (
     tripsApi.getTrips(query).then((res) => {
       const nextItemsData = {
-        items: res.data
+        items: res.data.content,
+        itemsMeta: {
+          number: res.data.number,
+          last: res.data.last,
+          totalElements: res.data.totalElements,
+          totalPages: res.data.totalPages
+        }
       };
 
       const nextState = {
