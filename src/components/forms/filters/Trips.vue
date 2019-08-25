@@ -8,6 +8,16 @@
       @filter="onFilter"
       @clear="onClearFilters"
     >
+      <v-autocomplete
+        v-model="driver"
+        :items="users"
+        label="Driver"
+        item-text="username"
+        item-value="id"
+        :return-object="true"
+        prepend-inner-icon="account_circle"
+      />
+
       <v-text-field
         v-model="origin"
         type="text"
@@ -56,6 +66,7 @@
 <script>
   import stringEscape from 'js-string-escape';
   import FiltersForm from './Filters';
+  import { isNum } from '../../../utils';
 
   // TODO: Translate component
 
@@ -69,6 +80,7 @@
         destination: '',
         departureDates: '',
         availablePlaces: '',
+        driver: {},
         smoking: false,
         luggage: false,
         pets: false,
@@ -82,20 +94,30 @@
       };
     },
     computed: {
+      users() {
+        return this.$store.getters['users/items'];
+      },
       hasFilters() {
-        const { origin, destination, availablePlaces, departureDates, smoking, luggage, pets } = this;
+        const { origin, destination, availablePlaces, departureDates, smoking, luggage, pets, driver } = this;
         return origin !== ''
           || destination !== ''
           || availablePlaces !== ''
           || departureDates !== ''
           || smoking !== ''
           || luggage !== ''
-          || pets !== '';
+          || pets !== ''
+          || isNum(driver.id);
       }
     },
+    created() {
+      this.getUsers();
+    },
     methods: {
+      getUsers() {
+        return this.$store.dispatch('users/getUsers');
+      },
       onFilter() {
-        const { origin, destination, availablePlaces, departureDates, smoking, luggage, pets } = this;
+        const { origin, destination, availablePlaces, departureDates, smoking, luggage, pets, driver } = this;
         const formattedOrigin = stringEscape(origin);
         const formattedDestination = stringEscape(destination);
 
@@ -106,7 +128,8 @@
           departureDates,
           smoking,
           luggage,
-          pets
+          pets,
+          driver: driver.id
         });
       },
       onClearFilters() {
@@ -117,6 +140,7 @@
         this.smoking = false;
         this.luggage = false;
         this.pets = false;
+        this.driver = {};
 
         this.$emit('clearFilters');
       },

@@ -127,6 +127,7 @@
     methods: {
       getTrips(options = {}) {
         const {
+          driver = -1,
           page = 0,
           perPage = 15,
           order = 'asc',
@@ -141,6 +142,7 @@
         } = options;
 
         const query = {
+          driver,
           page,
           perPage,
           order,

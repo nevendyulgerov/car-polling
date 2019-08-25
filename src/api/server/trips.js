@@ -5,6 +5,7 @@ import { getToken, getAccessQuery, apiUrl } from '../../utils/serverApi';
 export default {
   getTrips(queryFilters = {}) {
     const {
+      driver = -1,
       page = 0,
       perPage = 15,
       order = 'asc',
@@ -48,6 +49,10 @@ export default {
 
     if (availablePlaces > -1) {
       params.availablePlaces = availablePlaces;
+    }
+
+    if (driver > -1) {
+      params.driver = driver;
     }
 
     return axios({
