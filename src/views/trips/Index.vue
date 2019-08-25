@@ -235,7 +235,7 @@
           ...filters
         };
 
-        this.filterTrips(this.query);
+        this.getTrips(this.query);
       },
       onClearFilters() {
         const { sortBy } = this.pagination;
