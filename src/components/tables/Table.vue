@@ -173,15 +173,11 @@
       },
       firstItemIndex() {
         const { page, rowsPerPage } = this.pagination;
-        const nextPage = page + 1;
-
-        return (nextPage * rowsPerPage) - (rowsPerPage - 1);
+        return (page * rowsPerPage) - (rowsPerPage - 1);
       },
       lastItemIndex() {
         const { page, rowsPerPage, totalItems } = this.pagination;
-        const nextPage = page + 1;
-
-        const index = nextPage * rowsPerPage;
+        const index = page * rowsPerPage;
         return index < totalItems ? index : totalItems;
       },
       optionalColumns() {
