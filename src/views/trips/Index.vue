@@ -33,6 +33,7 @@
           :is-loading="isLoading"
           :on-select-item="selectTrip"
           :on-update-pagination="updatePagination"
+          :on-change-page="onChangePage"
         >
           <template slot="title">
             <h1>{{ 'Trips' }}</h1>
@@ -261,6 +262,23 @@
           page,
           order: descending ? 'desc' : 'asc',
           sort: isStr(sortBy) ? sortBy : pagination.sortBy
+        };
+
+        this.query = nextQuery;
+
+        this.getTrips(nextQuery);
+      },
+      onChangePage(page) {
+        console.warn('onChangePage::');
+        console.log(page);
+
+        const { query, pagination } = this;
+        const { descending, sortBy } = pagination;
+        const nextQuery = {
+          ...query,
+          page,
+          order: descending ? 'desc' : 'asc',
+          sort: sortBy
         };
 
         this.query = nextQuery;
