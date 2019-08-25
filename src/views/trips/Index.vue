@@ -180,7 +180,7 @@
           .then((res) => {
             const { itemsMeta } = res;
             this.isLoading = false;
-            this.pagination.page = itemsMeta.number;
+            this.pagination.page = itemsMeta.number + 1;
             this.pagination.totalItems = itemsMeta.totalElements;
             this.totalPages = itemsMeta.totalPages;
 
