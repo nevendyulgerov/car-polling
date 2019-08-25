@@ -85,12 +85,11 @@ const actions = {
   ),
   getUserAvatar: ({ commit, state }, query) => (
     authApi.getUserAvatar(query).then((res) => {
-      const avatar = res.data;
       const nextAuth = {
         ...state,
         user: {
           ...state.user,
-          avatarUri: avatar
+          avatarUri: res
         }
       };
 
