@@ -133,7 +133,7 @@
           sort = '',
           origin = '',
           destination = '',
-          departureTime = '',
+          departureDates = '',
           availablePlaces = -1
         } = options;
 
@@ -144,7 +144,7 @@
           sort,
           origin,
           destination,
-          departureTime,
+          departureDates,
           availablePlaces
         };
 

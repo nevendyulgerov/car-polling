@@ -21,6 +21,13 @@
         label="Destination"
         prepend-inner-icon="location_searching"
       />
+
+      <base-date-picker
+        :date="departureDates"
+        placeholder="Dates"
+        :config="dateConfig"
+        :on-change="onChangeDepartureDate"
+      />
     </FiltersForm>
   </div>
 </template>
@@ -38,7 +45,11 @@
     data() {
       return {
         origin: '',
-        destination: ''
+        destination: '',
+        departureDates: '',
+        dateConfig: {
+          mode: 'range'
+        },
       };
     },
     computed: {
@@ -50,21 +61,26 @@
     },
     methods: {
       onFilter() {
-        const { origin, destination } = this;
+        const { origin, destination, departureDates } = this;
         const formattedOrigin = stringEscape(origin);
         const formattedDestination = stringEscape(destination);
 
         this.$emit('filter', {
           origin: formattedOrigin,
-          destination: formattedDestination
+          destination: formattedDestination,
+          departureDates
         });
       },
       onClearFilters() {
         this.origin = '';
         this.destination = '';
+        this.departureDates = '';
 
         this.$emit('clearFilters');
-      }
+      },
+      onChangeDepartureDate(dates) {
+        this.departureDates = dates;
+      },
     }
   };
 </script>

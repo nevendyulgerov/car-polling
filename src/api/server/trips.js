@@ -10,7 +10,7 @@ export default {
       sort = '',
       origin = '',
       destination = '',
-      departureTime = '',
+      departureDates = '',
       availablePlaces = -1
     } = queryFilters;
 
@@ -29,12 +29,15 @@ export default {
       params.destination = destination;
     }
 
-    if (departureTime !== '') {
-      params.departure_time = departureTime;
+    if (departureDates !== '') {
+      const [earliestDepartureTime, latestDepartureTime] = departureDates.split(' - ');
+
+      params.earliestDepartureTime = earliestDepartureTime;
+      params.latestDepartureTime = latestDepartureTime;
     }
 
     if (availablePlaces > -1) {
-      params.available_places = availablePlaces;
+      params.availablePlaces = availablePlaces;
     }
 
     return axios({
