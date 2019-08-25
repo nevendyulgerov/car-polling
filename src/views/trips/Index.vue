@@ -87,6 +87,19 @@
   import columns from '../../config/trips/columns';
   import dateFormat from '../../config/dateFormat';
 
+  /*
+  :columns="columns"
+  :items="labels"
+  :pages="totalPages"
+  :pagination="pagination"
+  :is-loading="isLoading"
+  :has-custom-items-template="true"
+  :on-select-item="selectLabel"
+  :on-update-pagination="onUpdatePagination"
+  :on-change-page="onChangePage"
+  :on-action="onAction"
+   */
+
   export default {
     components: {
       AddTripDialog,
