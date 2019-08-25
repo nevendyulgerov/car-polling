@@ -99,7 +99,7 @@
         columns,
         pagination: {
           descending: true,
-          page: 1,
+          page: 0,
           rowsPerPage: 15,
           sortBy: 'origin',
           totalItems: 0,
