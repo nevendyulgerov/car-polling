@@ -22,11 +22,32 @@
         prepend-inner-icon="location_searching"
       />
 
+      <v-text-field
+        v-model="availablePlaces"
+        type="number"
+        label="Available places"
+      />
+
       <base-date-picker
         :date="departureDates"
         placeholder="Departure dates"
         :config="dateConfig"
         :on-change="onChangeDepartureDate"
+      />
+
+      <v-checkbox
+        v-model="smoking"
+        label="Smoking"
+      />
+
+      <v-checkbox
+        v-model="luggage"
+        label="Luggage"
+      />
+
+      <v-checkbox
+        v-model="pets"
+        label="Pets"
       />
     </FiltersForm>
   </div>
@@ -47,6 +68,10 @@
         origin: '',
         destination: '',
         departureDates: '',
+        availablePlaces: '',
+        smoking: false,
+        luggage: false,
+        pets: false,
         dateConfig: {
           mode: 'range',
           format: 'Y-m-d H:i',
@@ -58,27 +83,40 @@
     },
     computed: {
       hasFilters() {
-        const { origin, destination } = this;
+        const { origin, destination, availablePlaces, departureDates, smoking, luggage, pets } = this;
         return origin !== ''
-          || destination !== '';
+          || destination !== ''
+          || availablePlaces !== ''
+          || departureDates !== ''
+          || smoking !== ''
+          || luggage !== ''
+          || pets !== '';
       }
     },
     methods: {
       onFilter() {
-        const { origin, destination, departureDates } = this;
+        const { origin, destination, availablePlaces, departureDates, smoking, luggage, pets } = this;
         const formattedOrigin = stringEscape(origin);
         const formattedDestination = stringEscape(destination);
 
         this.$emit('filter', {
           origin: formattedOrigin,
           destination: formattedDestination,
-          departureDates
+          availablePlaces: availablePlaces !== '' ? Number(availablePlaces) : -1,
+          departureDates,
+          smoking,
+          luggage,
+          pets
         });
       },
       onClearFilters() {
         this.origin = '';
         this.destination = '';
+        this.availablePlaces = '';
         this.departureDates = '';
+        this.smoking = false;
+        this.luggage = false;
+        this.pets = false;
 
         this.$emit('clearFilters');
       },

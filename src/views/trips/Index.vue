@@ -134,7 +134,10 @@
           origin = '',
           destination = '',
           departureDates = '',
-          availablePlaces = -1
+          availablePlaces = -1,
+          smoking = false,
+          luggage = false,
+          pets = false
         } = options;
 
         const query = {
@@ -145,7 +148,10 @@
           origin,
           destination,
           departureDates,
-          availablePlaces
+          availablePlaces,
+          smoking,
+          luggage,
+          pets
         };
 
         this.isLoading = true;

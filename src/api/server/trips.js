@@ -12,14 +12,20 @@ export default {
       origin = '',
       destination = '',
       departureDates = '',
-      availablePlaces = -1
+      availablePlaces = -1,
+      smoking,
+      luggage,
+      pets,
     } = queryFilters;
 
     const params = {
       page,
       size: perPage,
       order,
-      sort
+      sort,
+      smoking,
+      luggage,
+      pets
     };
 
     if (origin !== '') {
