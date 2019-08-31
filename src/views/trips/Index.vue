@@ -205,9 +205,11 @@
       },
       toggleEditTripModal() {
         this.isEditTripModalOn = !this.isEditTripModalOn;
+        this.getTrips(this.query);
       },
       toggleNewTripModal() {
         this.isAddTripModalOn = !this.isAddTripModalOn;
+        this.getTrips(this.query);
       },
       createTrip(trip) {
         this.isAddingTrip = true;
