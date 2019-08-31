@@ -37,7 +37,7 @@
 
     <TripStatus
       :trip="trip"
-      :is-disabled="!canEditPassengers"
+      :is-disabled="!canEditTripStatus"
     >
       <template slot="beforeForm">
         <layout-section-header
