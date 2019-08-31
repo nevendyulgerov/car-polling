@@ -16,6 +16,9 @@
         :items="statuses"
         label="Status"
         title="Status"
+        item-text="name"
+        item-value="name"
+        :return-object="true"
         @change="onChangeStatus"
       />
     </div>
@@ -57,10 +60,6 @@
       margin: 0 12px 12px 0;
       color: $colors.shades.white;
       background-color: $colors.primary;
-
-      .passenger-username {
-
-      }
 
       .passenger-status {
         .v-input {

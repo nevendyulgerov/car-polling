@@ -181,7 +181,10 @@ const actions = {
   },
   getPassengerStatuses: ({ commit, state }) => (
     tripsApi.getPassengerStatuses().then((res) => {
-      const statuses = res.data;
+      const statuses = res.data.map((status) => ({
+        name: status,
+        disabled: status === 'pending'
+      }));
 
       const nextState = {
         ...state,

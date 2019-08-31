@@ -358,7 +358,7 @@
         const query = {
           tripId: this.trip.id,
           passengerId: passenger.id,
-          status,
+          status: status.name,
         };
 
         return this.$store.dispatch('trips/changePassengerStatus', query);
