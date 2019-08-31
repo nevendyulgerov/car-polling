@@ -47,7 +47,10 @@
             slot="item-cell"
             slot-scope="scope"
           >
-            <div v-if="isFlag(scope.cell.column.value)">
+            <div v-if="scope.cell.column.value === 'driver'">
+              {{ `${scope.cell.item.driver.firstName} ${scope.cell.item.driver.lastName}` }}
+            </div>
+            <div v-else-if="isFlag(scope.cell.column.value)">
               <v-icon
                 :color="scope.cell.item[scope.cell.column.value] ? 'success' : 'error'"
               >

@@ -1,4 +1,10 @@
 export default [{
+  text: 'Driver',
+  value: 'driver',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
   text: 'Origin',
   value: 'origin',
   isDefault: true,
