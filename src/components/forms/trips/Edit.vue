@@ -78,7 +78,8 @@
     data() {
       return {
         canEditTrip: false,
-        canEditPassengers: false
+        canEditPassengers: false,
+        canEditTripStatus: false
       };
     },
     computed: {
