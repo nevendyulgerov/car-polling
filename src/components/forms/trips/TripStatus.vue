@@ -2,6 +2,7 @@
   <div
     data-component-group="trips-form"
     data-component="trip-status"
+    class="elevation-4"
   >
     <slot name="beforeForm" />
 
@@ -80,6 +81,7 @@
     &[data-component="trip-status"] {
       padding: 16px;
       border-radius: 2px;
+      margin-top: 24px;
       background-color: $colors.shades.white;
     }
   }

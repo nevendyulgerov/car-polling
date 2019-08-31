@@ -2,6 +2,7 @@
   <div
     data-component-group="trips-form"
     data-component="passengers"
+    class="elevation-4"
   >
     <slot name="beforeForm" />
 
@@ -84,6 +85,7 @@
     &[data-component="passengers"] {
       padding: 16px;
       border-radius: 2px;
+      margin-top: 24px;
       background-color: $colors.shades.white;
     }
   }
