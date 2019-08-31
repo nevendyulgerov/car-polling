@@ -58,14 +58,9 @@
       loggedUser() {
         return this.$store.getters['auth/user'];
       },
-      hasDriver() {
-        return isObj(this.trip.driver);
-      },
       isTripDriver() {
-        const { trip, loggedUser, hasDriver } = this;
-
-        // TODO: Revert logic when logged user is available
-        return true; // hasDriver && trip.driver.id === loggedUser.id;
+        const { trip, loggedUser } = this;
+        return trip.driver.id === loggedUser.id;
       }
     },
     watch: {

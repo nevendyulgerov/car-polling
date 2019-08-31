@@ -96,7 +96,13 @@
         :readonly="isDisabled"
       />
 
-      <div v-if="hasTrip">
+      <div
+        v-if="hasTrip && trip.passengersList.length > 0"
+        class="passengers"
+      >
+        <div>
+          {{ 'Passengers' }}
+        </div>
         <template v-for="passenger in trip.passengersList">
           <Passenger
             :key="passenger.id"
@@ -350,7 +356,7 @@
       },
       onChangePassengerStatus(passenger, status) {
         const query = {
-          id: this.trip.id,
+          tripId: this.trip.id,
           passengerId: passenger.id,
           status,
         };
@@ -388,6 +394,10 @@
             margin-right: 0;
           }
         }
+      }
+
+      .passengers {
+        margin: 24px 0;
       }
     }
   }
