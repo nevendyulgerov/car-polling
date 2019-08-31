@@ -60,7 +60,7 @@
       },
       isTripDriver() {
         const { trip, loggedUser } = this;
-        return trip.driver.id === loggedUser.id;
+        return isObj(trip) && isObj(trip.driver) && trip.driver.id === loggedUser.id;
       }
     },
     watch: {
