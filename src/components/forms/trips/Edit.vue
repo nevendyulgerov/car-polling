@@ -23,7 +23,7 @@
 
     <Passengers
       :trip="trip"
-      :is-disabled="!canEditPassengers"
+      :is-disabled="!isTripDriver && !canEditPassengers"
     >
       <template slot="beforeForm">
         <layout-section-header
@@ -37,7 +37,7 @@
 
     <TripStatus
       :trip="trip"
-      :is-disabled="!canEditTripStatus"
+      :is-disabled="!isTripDriver && !canEditTripStatus"
     >
       <template slot="beforeForm">
         <layout-section-header
