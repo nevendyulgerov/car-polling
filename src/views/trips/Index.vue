@@ -106,6 +106,7 @@
     data() {
       return {
         columns,
+        trips: [],
         pagination: {
           descending: true,
           page: 0,
@@ -129,9 +130,6 @@
     computed: {
       loggedUser() {
         return this.$store.getters['auth/user'];
-      },
-      trips() {
-        return this.$store.getters['trips/items'];
       },
       totalCount() {
         return this.trips.length;
@@ -184,7 +182,8 @@
 
         return this.$store.dispatch('trips/getTrips', query)
           .then((res) => {
-            const { itemsMeta } = res;
+            const { items, itemsMeta } = res;
+            this.trips = items;
             this.isLoading = false;
             this.pagination.page = itemsMeta.number + 1;
             this.pagination.totalItems = itemsMeta.totalElements;
@@ -305,6 +304,12 @@
 
         return this.$store.dispatch('trips/applyForTrip', query)
           .then((res) => {
+            this.trips = this.trips.map((t) => ({
+              ...t,
+              passengersList: t.id === trip.id
+                ? [...t.passengersList, this.loggedUser]
+                : t.passengersList
+            }));
             this.isApplyingForTrip = false;
             return res;
           });

@@ -97,7 +97,7 @@
       />
 
       <div v-if="hasTrip">
-        <template v-for="passenger in trip.passengers">
+        <template v-for="passenger in trip.passengersList">
           <Passenger
             :key="passenger.id"
             :username="passenger.username"
