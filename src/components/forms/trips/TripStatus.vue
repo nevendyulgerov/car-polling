@@ -72,3 +72,15 @@
     }
   };
 </script>
+
+<style lang="stylus" scoped>
+  @import '../../../assets/stylus/theme.styl';
+
+  [data-component-group="trips-form"] {
+    &[data-component="trip-status"] {
+      padding: 16px;
+      border-radius: 2px;
+      background-color: $colors.shades.white;
+    }
+  }
+</style>

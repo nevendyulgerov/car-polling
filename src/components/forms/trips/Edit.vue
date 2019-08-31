@@ -110,3 +110,18 @@
     }
   };
 </script>
+
+<style lang="stylus">
+  [data-component-group="trips-for"] {
+    &[data-component="edit"] {
+
+      [data-component="passengers"] {
+        margin-top: 24px;
+      }
+
+      [data-component="trip-status"] {
+        margin-top: 24px;
+      }
+    }
+  }
+</style>
