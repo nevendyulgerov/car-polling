@@ -12,7 +12,8 @@ export default {
     activeItem: {},
     items: [],
     itemsMeta: {},
-    statuses: []
+    statuses: [],
+    tripStatuses: []
   },
   alerts: {
     info: [],

@@ -138,10 +138,14 @@
     },
     created() {
       this.getPassengerStatuses();
+      this.getTripStatuses();
     },
     methods: {
       getPassengerStatuses() {
         return this.$store.dispatch('trips/getPassengerStatuses');
+      },
+      getTripStatuses() {
+        return this.$store.dispatch('trips/getTripStatuses');
       },
       getTrips(options = {}) {
         const {

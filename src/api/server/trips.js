@@ -151,5 +151,28 @@ export default {
         Authorization: `Bearer ${getToken()}`
       }
     });
+  },
+  getTripStatuses() {
+    return axios({
+      method: 'get',
+      url: `${apiUrl}/trips/allTripStatuses`,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+  },
+  changeTripStatus(tripId, status) {
+    const params = {
+      status
+    };
+
+    return axios({
+      method: 'patch',
+      url: `${apiUrl}/trips/${tripId}`,
+      params,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
   }
 };

@@ -16,20 +16,46 @@
           title="Trip details"
           :trigger-label="canEditTrip ? 'Close' : 'Edit trip'"
           :has-trigger="isTripDriver"
-          @toggle="toggleTripDetails"
+          @toggle="toggleEditTrip"
         />
       </template>
     </TripForm>
+
+    <Passengers :trip="trip">
+      <template slot="beforeForm">
+        <layout-section-header
+          title="Passengers"
+          :trigger-label="canEditPassengers ? 'Close' : 'Edit'"
+          :has-trigger="isTripDriver"
+          @toggle="toggleEditPassengers"
+        />
+      </template>
+    </Passengers>
+
+    <TripStatus :trip="trip">
+      <template slot="beforeForm">
+        <layout-section-header
+          title="Trip Status"
+          :trigger-label="canEditTripStatus ? 'Close' : 'Edit'"
+          :has-trigger="isTripDriver"
+          @toggle="toggleEditTripStatus"
+        />
+      </template>
+    </TripStatus>
   </div>
 </template>
 
 <script>
   import TripForm from './AddNew';
+  import Passengers from './Passengers';
+  import TripStatus from './TripStatus';
   import { isObj } from '../../../utils';
 
   export default {
     components: {
-      TripForm
+      TripForm,
+      Passengers,
+      TripStatus
     },
     props: {
       trip: {
@@ -51,7 +77,8 @@
     },
     data() {
       return {
-        canEditTrip: false
+        canEditTrip: false,
+        canEditPassengers: false
       };
     },
     computed: {
@@ -71,8 +98,14 @@
       }
     },
     methods: {
-      toggleTripDetails() {
+      toggleEditTrip() {
         this.canEditTrip = !this.canEditTrip;
+      },
+      toggleEditPassengers() {
+        this.canEditPassengers = !this.canEditPassengers;
+      },
+      toggleEditTripStatus() {
+        this.canEditTripStatus = !this.canEditTripStatus;
       }
     }
   };

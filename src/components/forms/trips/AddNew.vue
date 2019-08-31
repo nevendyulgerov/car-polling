@@ -97,24 +97,6 @@
       />
 
       <div
-        v-if="hasTrip && trip.passengersList.length > 0"
-        class="passengers"
-      >
-        <div>
-          {{ 'Passengers' }}
-        </div>
-        <template v-for="passenger in trip.passengersList">
-          <Passenger
-            :key="passenger.id"
-            :username="passenger.username"
-            :status="passenger.status"
-            :is-disabled="isDisabled"
-            :on-change-status="(status) => onChangePassengerStatus(passenger, status)"
-          />
-        </template>
-      </div>
-
-      <div
         v-if="!isDisabled"
         class="form-actions"
       >
@@ -270,10 +252,6 @@
           errors.push('Destination is required');
         }
         return errors;
-      },
-      hasTrip() {
-        const { trip } = this;
-        return isObj(trip) && isNum(trip.id);
       }
     },
     watch: {
@@ -354,15 +332,6 @@
         this.smoking = smoking;
         this.pets = pets;
         this.luggage = luggage;
-      },
-      onChangePassengerStatus(passenger, status) {
-        const query = {
-          tripId: this.trip.id,
-          passengerId: passenger.id,
-          status: status.name,
-        };
-
-        return this.$store.dispatch('trips/changePassengerStatus', query);
       }
     }
   };

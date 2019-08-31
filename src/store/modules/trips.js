@@ -11,12 +11,13 @@ const tripsApi = apiClient.trips;
  * @returns {boolean}
  */
 const isValid = (trips) => {
-  const { activeItem, items, itemsMeta, statuses } = trips;
+  const { activeItem, items, itemsMeta, statuses, tripStatuses } = trips;
 
   return isObj(activeItem)
     && isArr(items)
     && isObj(itemsMeta)
-    && isArr(statuses);
+    && isArr(statuses)
+    && isArr(tripStatuses);
 };
 
 /**
@@ -29,13 +30,14 @@ const initState = initialState => {
     throw Error('Invalid initial trips state');
   }
 
-  const { activeItem, items, itemsMeta, statuses } = initialState;
+  const { activeItem, items, itemsMeta, statuses, tripStatuses } = initialState;
 
   return {
     activeItem,
     items,
     itemsMeta,
-    statuses
+    statuses,
+    tripStatuses
   };
 };
 
@@ -47,7 +49,8 @@ export const getters = {
   activeItem: ({ activeItem }) => activeItem,
   items: ({ items }) => items,
   itemsMeta: ({ itemsMeta }) => itemsMeta,
-  statuses: ({ statuses }) => statuses
+  statuses: ({ statuses }) => statuses,
+  tripStatuses: ({ tripStatuses }) => tripStatuses
 };
 
 /**
@@ -196,6 +199,23 @@ const actions = {
       return statuses;
     })
   ),
+  getTripStatuses: ({ commit, state }) => (
+    tripsApi.getTripStatuses().then((res) => {
+      const tripStatuses = res.data.map((status) => ({
+        name: status,
+        disabled: status === 'pending'
+      }));
+
+      const nextState = {
+        ...state,
+        tripStatuses
+      };
+
+      commit('SET', nextState);
+
+      return tripStatuses;
+    })
+  ),
   changePassengerStatus: (context, query) => (
     tripsApi.changePassengerStatus(query).then((res) => {
 
@@ -225,6 +245,7 @@ const mutations = {
     state.items = trips.items;
     state.itemsMeta = trips.itemsMeta;
     state.statuses = trips.statuses;
+    state.tripStatuses = trips.tripStatuses;
   }
 };
 
