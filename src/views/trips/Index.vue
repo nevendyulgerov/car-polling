@@ -110,7 +110,7 @@
         pagination: {
           descending: true,
           page: 0,
-          rowsPerPage: 15,
+          rowsPerPage: 10,
           sortBy: 'origin',
           totalItems: 0,
           search: ''
@@ -151,7 +151,7 @@
         const {
           driver = '',
           page = 0,
-          perPage = 15,
+          perPage = 10,
           order = 'asc',
           sort = '',
           origin = '',
