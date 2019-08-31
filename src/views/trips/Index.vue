@@ -289,8 +289,8 @@
       },
       canApplyForTrip(trip) {
         const { loggedUser } = this;
-        const { driver, passengers } = trip;
-        const passengerIds = passengers.map(({ id }) => id);
+        const { driver, passengersList } = trip;
+        const passengerIds = passengersList.map(({ id }) => id);
 
         return driver.id !== loggedUser.id
           && passengerIds.indexOf(loggedUser.id) === -1;
