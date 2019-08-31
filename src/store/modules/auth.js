@@ -60,7 +60,7 @@ const handleAlerts = (data, alertType = 'error') => (
 
 const actions = {
   login: ({ commit, state }, userAuth) => (
-    authApi.fakeLogin(userAuth).then((res) => {
+    authApi.login(userAuth).then((res) => {
       const nextAuthorization = res.data.idToken;
       const nextAuth = {
         ...state,
@@ -71,7 +71,7 @@ const actions = {
     })
   ),
   me: ({ commit, state }) => (
-    authApi.fakeMe().then((res) => {
+    authApi.me().then((res) => {
       const nextUser = res.data;
       const nextAuth = {
         ...state,
@@ -84,7 +84,7 @@ const actions = {
     })
   ),
   getUserAvatar: ({ commit, state }, query) => (
-    authApi.fakeGetUserAvatar(query).then((res) => {
+    authApi.getUserAvatar(query).then((res) => {
       const nextAuth = {
         ...state,
         user: {
