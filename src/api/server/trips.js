@@ -161,7 +161,7 @@ export default {
       }
     });
   },
-  changeTripStatus(tripId, status) {
+  changeTripStatus({ tripId, status }) {
     const params = {
       status
     };
