@@ -130,14 +130,14 @@ export default {
     });
   },
   changePassengerStatus({ tripId, passengerId, status }) {
-    const data = {
+    const params = {
       status
     };
 
     return axios({
       method: 'patch',
       url: `${apiUrl}/trips/${tripId}/passengers/${passengerId}`,
-      data,
+      params,
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
