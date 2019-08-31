@@ -60,7 +60,7 @@
             <div v-else-if="scope.cell.column.value === 'apply'">
               <v-btn
                 v-if="canApplyForTrip(scope.cell.item)"
-                :loading="isApplyingForTrip"
+                :loading="applyTrip.id === scope.cell.item.id && isApplyingForTrip"
                 @click="applyForTrip(scope.cell.item)"
               >
                 {{ 'Apply' }}
@@ -118,6 +118,7 @@
         selectedTrip: {},
         totalPages: 0,
         query: {},
+        applyTrip: {},
         dateFormat,
         isEditTripModalOn: false,
         isEditingTrip: false,
@@ -302,6 +303,7 @@
           tripId: trip.id
         };
 
+        this.applyTrip = trip;
         this.isApplyingForTrip = true;
 
         return this.$store.dispatch('trips/applyForTrip', query)
@@ -312,10 +314,13 @@
                 ? [...t.passengersList, this.loggedUser]
                 : t.passengersList
             }));
+
+            this.applyTrip = {};
             this.isApplyingForTrip = false;
             return res;
           })
           .catch((err) => {
+            this.applyTrip = {};
             this.isApplyingForTrip = false;
             return err;
           });

@@ -18,6 +18,7 @@
         title="Status"
         item-text="name"
         item-value="name"
+        :disabled="isDisabled"
         :return-object="true"
         @change="onChangeStatus"
       />
@@ -35,6 +36,10 @@
       status: {
         type: String,
         required: true
+      },
+      isDisabled: {
+        type: Boolean,
+        default: false
       },
       onChangeStatus: {
         type: Function,

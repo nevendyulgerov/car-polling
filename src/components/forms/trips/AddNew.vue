@@ -108,6 +108,7 @@
             :key="passenger.id"
             :username="passenger.username"
             :status="passenger.status"
+            :is-disabled="isDisabled"
             :on-change-status="(status) => onChangePassengerStatus(passenger, status)"
           />
         </template>
