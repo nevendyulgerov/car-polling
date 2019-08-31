@@ -21,7 +21,10 @@
       </template>
     </TripForm>
 
-    <Passengers :trip="trip">
+    <Passengers
+      :trip="trip"
+      :is-disabled="!canEditPassengers"
+    >
       <template slot="beforeForm">
         <layout-section-header
           title="Passengers"
@@ -32,7 +35,10 @@
       </template>
     </Passengers>
 
-    <TripStatus :trip="trip">
+    <TripStatus
+      :trip="trip"
+      :is-disabled="!canEditTripStatus"
+    >
       <template slot="beforeForm">
         <layout-section-header
           title="Trip Status"

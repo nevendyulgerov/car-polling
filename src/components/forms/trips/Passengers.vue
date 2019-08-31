@@ -39,6 +39,10 @@
       trip: {
         type: Object,
         required: true
+      },
+      isDisabled: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
