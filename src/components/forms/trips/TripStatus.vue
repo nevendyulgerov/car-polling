@@ -57,7 +57,7 @@
       }
     },
     methods: {
-      onChangeTripStatus(passenger, status) {
+      onChangeTripStatus(status) {
         const query = {
           tripId: this.trip.id,
           status: status.name,
