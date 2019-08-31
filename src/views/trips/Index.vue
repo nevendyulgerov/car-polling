@@ -314,6 +314,10 @@
             }));
             this.isApplyingForTrip = false;
             return res;
+          })
+          .catch((err) => {
+            this.isApplyingForTrip = false;
+            return err;
           });
       }
     },
