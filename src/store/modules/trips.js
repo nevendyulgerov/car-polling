@@ -197,7 +197,16 @@ const actions = {
     })
   ),
   changePassengerStatus: (context, query) => (
-    tripsApi.changePassengerStatus(query).then((res) => res.data)
+    tripsApi.changePassengerStatus(query).then((res) => {
+
+      handleAlerts({
+        data: {
+          message: 'Passenger status updated successfully.'
+        }
+      }, 'success');
+
+      return res.data;
+    })
   ),
   applyForTrip: (context, query) => (
     tripsApi.applyForTrip(query).then((res) => res.data)
