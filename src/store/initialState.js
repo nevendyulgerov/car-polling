@@ -11,7 +11,8 @@ export default {
   trips: {
     activeItem: {},
     items: [],
-    itemsMeta: {}
+    itemsMeta: {},
+    statuses: []
   },
   alerts: {
     info: [],

@@ -96,6 +96,17 @@
         :readonly="isDisabled"
       />
 
+      <div v-if="hasTrip">
+        <template v-for="passenger in trip.passengers">
+          <Passenger
+            :key="passenger.id"
+            :username="passenger.username"
+            :status="passenger.status"
+            :on-change-status="(status) => onChangePassengerStatus(passenger, status)"
+          />
+        </template>
+      </div>
+
       <div
         v-if="!isDisabled"
         class="form-actions"
@@ -127,10 +138,14 @@
 <script>
   import { validationMixin } from 'vuelidate';
   import { required } from 'vuelidate/lib/validators';
+  import Passenger from '../../panels/users/Passenger';
   import dateFormat from '../../../config/dateFormat';
-  import { isObj } from '../../../utils';
+  import { isObj, isNum } from '../../../utils';
 
   export default {
+    components: {
+      Passenger
+    },
     mixins: [validationMixin],
     validations() {
       return {
@@ -250,7 +265,8 @@
         return errors;
       },
       hasTrip() {
-        return isObj(this.trip);
+        const { trip } = this;
+        return isObj(trip) && isNum(trip.id);
       }
     },
     watch: {
@@ -331,6 +347,15 @@
         this.smoking = smoking;
         this.pets = pets;
         this.luggage = luggage;
+      },
+      onChangePassengerStatus(passenger, status) {
+        const query = {
+          id: this.trip.id,
+          passengerId: passenger.id,
+          status,
+        };
+
+        return this.$store.dispatch('trips/changePassengerStatus', query);
       }
     }
   };

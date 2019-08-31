@@ -119,5 +119,37 @@ export default {
       }
     });
      */
+  },
+  getPassengerStatuses() {
+    return axios({
+      method: 'get',
+      url: `${apiUrl}/trips/allPassengerStatuses`,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+  },
+  changePassengerStatus({ tripId, passengerId, status }) {
+    const data = {
+      status
+    };
+
+    return axios({
+      method: 'patch',
+      url: `${apiUrl}/trips/${tripId}/passengers/${passengerId}`,
+      data,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+  },
+  applyForTrip({ tripId }) {
+    return axios({
+      method: 'post',
+      url: `${apiUrl}/trips/${tripId}/passengers`,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
   }
 };

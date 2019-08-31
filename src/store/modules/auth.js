@@ -1,7 +1,7 @@
 import apiClient from 'api-client';
 import router from '../../router';
 import initialState from '../initialState';
-import { isObj, isNum, isStr, arrayBufferToBase64 } from '../../utils';
+import { isObj, isNum, isStr } from '../../utils';
 import store from '../../store';
 import isAuthorized from '../../utils/authorization';
 
@@ -60,7 +60,7 @@ const handleAlerts = (data, alertType = 'error') => (
 
 const actions = {
   login: ({ commit, state }, userAuth) => (
-    authApi.login(userAuth).then((res) => {
+    authApi.fakeLogin(userAuth).then((res) => {
       const nextAuthorization = res.data.idToken;
       const nextAuth = {
         ...state,
@@ -71,7 +71,7 @@ const actions = {
     })
   ),
   me: ({ commit, state }) => (
-    authApi.me().then((res) => {
+    authApi.fakeMe().then((res) => {
       const nextUser = res.data;
       const nextAuth = {
         ...state,
@@ -84,7 +84,7 @@ const actions = {
     })
   ),
   getUserAvatar: ({ commit, state }, query) => (
-    authApi.getUserAvatar(query).then((res) => {
+    authApi.fakeGetUserAvatar(query).then((res) => {
       const nextAuth = {
         ...state,
         user: {

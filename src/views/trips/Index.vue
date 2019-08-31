@@ -57,6 +57,15 @@
             <div v-else-if="scope.cell.column.value === 'departureTime'">
               {{ $moment(scope.cell.item.departureTime).format(dateFormat) }}
             </div>
+            <div v-else-if="scope.cell.column.value === 'apply'">
+              <v-btn
+                v-if="canApplyForTrip(scope.cell.item)"
+                :loading="isApplyingForTrip"
+                @click="applyForTrip(scope.cell.item)"
+              >
+                {{ 'Apply' }}
+              </v-btn>
+            </div>
             <div v-else>
               {{ displayColumnValue(scope.cell.item, scope.cell.column.value) }}
             </div>
@@ -113,10 +122,14 @@
         isEditingTrip: false,
         isAddTripModalOn: false,
         isAddingTrip: false,
-        isLoading: false
+        isLoading: false,
+        isApplyingForTrip: false
       };
     },
     computed: {
+      loggedUser() {
+        return this.$store.getters['auth/user'];
+      },
       trips() {
         return this.$store.getters['trips/items'];
       },
@@ -124,7 +137,13 @@
         return this.trips.length;
       }
     },
+    created() {
+      this.getPassengerStatuses();
+    },
     methods: {
+      getPassengerStatuses() {
+        return this.$store.dispatch('trips/getPassengerStatuses');
+      },
       getTrips(options = {}) {
         const {
           driver = '',
@@ -238,11 +257,6 @@
         this.getTrips(this.query);
       },
       updatePagination({ page, descending, sortBy }) {
-        console.warn('updatePagination::');
-        console.log(page);
-        console.log(descending);
-        console.log(sortBy);
-
         const { query, pagination } = this;
         const nextQuery = {
           ...query,
@@ -256,9 +270,6 @@
         this.getTrips(nextQuery);
       },
       onChangePage(page) {
-        console.warn('onChangePage::');
-        console.log(page);
-
         const { query, pagination } = this;
         const { descending, sortBy } = pagination;
         const nextQuery = {
@@ -276,6 +287,27 @@
         return value === 'smoking'
           || value === 'pets'
           || value === 'luggage';
+      },
+      canApplyForTrip(trip) {
+        const { loggedUser } = this;
+        const { driver, passengers } = trip;
+        const passengerIds = passengers.map(({ id }) => id);
+
+        return driver.id !== loggedUser.id
+          && passengerIds.indexOf(loggedUser.id) === -1;
+      },
+      applyForTrip(trip) {
+        const query = {
+          tripId: trip.id
+        };
+
+        this.isApplyingForTrip = true;
+
+        return this.$store.dispatch('trips/applyForTrip', query)
+          .then((res) => {
+            this.isApplyingForTrip = false;
+            return res;
+          });
       }
     },
     metaInfo() {

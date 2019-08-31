@@ -46,4 +46,10 @@ export default [{
   isSelected: false,
   isDefault: false,
   isRequired: false
+}, {
+  text: 'Apply',
+  value: 'apply',
+  isSelected: true,
+  isDefault: true,
+  isRequired: true
 }];
