@@ -190,9 +190,7 @@ export default {
     return axios({
       method: 'post',
       url: `${apiUrl}/trips/${tripId}/driver/rate`,
-      data: {
-        rating
-      },
+      data: rating,
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
@@ -202,9 +200,7 @@ export default {
     return axios({
       method: 'post',
       url: `${apiUrl}/trips/${tripId}/passenger/${passengerId}/rate`,
-      data: {
-        rating
-      },
+      data: rating,
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
