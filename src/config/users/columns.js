@@ -23,6 +23,12 @@ export default [{
   isSelected: true,
   isRequired: true
 }, {
+  text: 'Rating',
+  value: 'rating',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
   text: 'Avatar',
   value: 'avatarUri',
   isDefault: true,

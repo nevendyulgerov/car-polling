@@ -93,32 +93,29 @@ export default {
     });
   },
   createTrip(trip) {
-    console.warn('createTrip::');
-    console.log(trip);
-
-    /*
     return axios({
       method: 'post',
       url: `${apiUrl}/trips`,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      },
       data: {
         ...trip
       }
     });
-     */
   },
-  updateTrip(trip) {
-    console.warn('updateTrip::');
-    console.log(trip);
 
-    /*
+  updateTrip(trip) {
     return axios({
       method: 'put',
-      url: `${apiUrl}/trips/${trip.id}`,
+      url: `${apiUrl}/trips`,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      },
       data: {
         ...trip
       }
     });
-     */
   },
   getPassengerStatuses() {
     return axios({
