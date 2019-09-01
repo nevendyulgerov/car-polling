@@ -177,7 +177,7 @@ export default {
   },
   addTripComment({ tripId, comment }) {
     const data = {
-      comment
+      ...comment
     };
 
     return axios({
