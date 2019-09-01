@@ -49,6 +49,11 @@
           >
             <div v-if="scope.cell.column.value === 'driver'">
               {{ `${scope.cell.item.driver.firstName} ${scope.cell.item.driver.lastName}` }}
+
+              <Rate
+                v-if="canRateDriver(scope.cell.item)"
+                :on-rate="(rating) => onRateDriver(rating, scope.cell.item)"
+              />
             </div>
             <div v-else-if="isFlag(scope.cell.column.value)">
               <v-icon
@@ -96,6 +101,7 @@
   import TripFilters from '../../components/forms/filters/Trips';
   import AddTripDialog from '../../components/dialogs/trips/AddDialog';
   import EditTripDialog from '../../components/dialogs/trips/EditDialog';
+  import Rate from '../../components/forms/trips/Rate';
   import { extractNestedProp, isStr } from '../../utils';
   import columns from '../../config/trips/columns';
   import dateFormat from '../../config/dateFormat';
@@ -104,7 +110,8 @@
     components: {
       AddTripDialog,
       EditTripDialog,
-      TripFilters
+      TripFilters,
+      Rate
     },
     data() {
       return {
@@ -331,6 +338,23 @@
             this.isApplyingForTrip = false;
             return err;
           });
+      },
+      onRateDriver(rating, trip) {
+        const query = {
+          tripId: trip.id,
+          rating
+        };
+
+        return this.$store.dispatch('trips/rateDriver', query);
+      },
+      canRateDriver(trip) {
+        const { loggedUser } = this;
+        const { status, driver, passengersList } = trip;
+        const passengerIds = passengersList.map(({ id }) => id);
+
+        return status === 'done'
+          && driver.id !== loggedUser.id
+          && passengerIds.indexOf(loggedUser.id) > -1;
       }
     },
     metaInfo() {

@@ -251,6 +251,12 @@ const actions = {
   applyForTrip: (context, query) => (
     tripsApi.applyForTrip(query).then((res) => res.data)
   ),
+  rateDriver: (context, query) => (
+    tripsApi.rateDriver(query).then((res) => res.data)
+  ),
+  ratePassenger: (context, query) => (
+    tripsApi.ratePassenger(query).then((res) => res.data)
+  ),
   reset: ({ commit }) => (
     commit('SET', initialState.trips)
   ),

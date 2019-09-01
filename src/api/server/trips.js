@@ -185,5 +185,29 @@ export default {
         Authorization: `Bearer ${getToken()}`
       }
     });
+  },
+  rateDriver({ tripId, rating }) {
+    return axios({
+      method: 'post',
+      url: `${apiUrl}/trips/${tripId}/driver/rate`,
+      data: {
+        rating
+      },
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
+  },
+  ratePassenger({ tripId, passengerId, rating }) {
+    return axios({
+      method: 'post',
+      url: `${apiUrl}/trips/${tripId}/passenger/${passengerId}/rate`,
+      data: {
+        rating
+      },
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
   }
 };
