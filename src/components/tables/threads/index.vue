@@ -99,8 +99,6 @@
   import StartDatePanel from '../../panels/threads/StartDate';
   import { extractNestedProp } from '../../../utils';
 
-  // TODO: Translate component
-
   export default {
     components: {
       ThreadPanel,

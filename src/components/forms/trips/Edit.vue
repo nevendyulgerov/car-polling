@@ -49,15 +49,21 @@
       </template>
     </TripStatus>
 
-    <AddComment :on-submit="onSubmitComment">
+    <AddComment
+      :trip="trip"
+      :is-loading="isPostingComment"
+      :is-disabled="!canEditComments"
+      :on-submit="onSubmitComment"
+    >
       <template slot="beforeForm">
         <layout-section-header
           title="Comments"
           :trigger-label="canEditComments ? 'Close' : 'Edit'"
-          :has-trigger="isTripDriver"
+          :has-trigger="isTripDriver || isTripPassenger"
           @toggle="toggleEditComments"
         />
       </template>
+
       <template slot="afterForm">
         <Comments :comments="trip.comments" />
       </template>
@@ -104,7 +110,8 @@
         canEditTrip: false,
         canEditPassengers: false,
         canEditTripStatus: false,
-        canEditComments: false
+        canEditComments: false,
+        isPostingComment: false
       };
     },
     computed: {
@@ -114,6 +121,12 @@
       isTripDriver() {
         const { trip, loggedUser } = this;
         return isObj(trip) && isObj(trip.driver) && trip.driver.id === loggedUser.id;
+      },
+      isTripPassenger() {
+        const { trip, loggedUser } = this;
+        const passengerIds = trip.passengersList.map(({ id }) => id);
+
+        return passengerIds.indexOf(loggedUser.id) > -1;
       }
     },
     watch: {
@@ -137,7 +150,26 @@
         this.canEditComments = !this.canEditComments;
       },
       onSubmitComment(comment) {
+        const query = {
+          message: comment,
+          author: this.loggedUser
+        };
 
+        this.isPostingComment = true;
+        return this.$store.dispatch('trips/addTripComment', query)
+          .then((res) => {
+            this.trip.comments = [
+              ...this.trip.comments,
+              query
+            ];
+
+            this.isPostingComment = false;
+            return res;
+          })
+          .catch((err) => {
+            this.isPostingComment = false;
+            return err;
+          });
       }
     }
   };

@@ -53,8 +53,6 @@
   import columns from '../../../config/threads/columns';
   import bulkActions from '../../../config/threads/actions/bulk';
 
-  // TODO: Translate component
-
   export default {
     components: {
       ThreadsTable,

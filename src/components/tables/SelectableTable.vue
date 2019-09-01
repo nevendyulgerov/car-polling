@@ -106,8 +106,6 @@
   import uid from 'uid';
   import { isObj, extractNestedProp } from '../../utils';
 
-  // TODO: Translate component
-
   export default {
     props: {
       selectedRows: {

@@ -68,8 +68,6 @@
   import FiltersForm from './Filters';
   import { isNum } from '../../../utils';
 
-  // TODO: Translate component
-
   export default {
     components: {
       FiltersForm

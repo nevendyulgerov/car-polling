@@ -237,6 +237,17 @@ const actions = {
       return res.data;
     })
   ),
+  addTripComment: (context, query) => (
+    tripsApi.addTripComment(query).then((res) => {
+      handleAlerts({
+        data: {
+          message: 'Comment posted successfully.'
+        }
+      }, 'success');
+
+      return res.data;
+    })
+  ),
   applyForTrip: (context, query) => (
     tripsApi.applyForTrip(query).then((res) => res.data)
   ),

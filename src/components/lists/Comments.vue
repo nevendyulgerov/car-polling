@@ -26,18 +26,10 @@
               </span>
             </v-list-tile-title>
 
-            <span class="comment-action">
-              {{ getMessage(comment) }}
-            </span>
-
             <span
               class="comment"
-              v-html="comment.comment.text"
+              v-html="comment.message"
             ></span>
-
-            <span class="timestamp">
-              {{ comment.updated_at }}
-            </span>
           </div>
         </v-list-tile>
       </template>
@@ -62,15 +54,8 @@
       }
     },
     methods: {
-      getActorName({ comment }) {
-        return comment.actor;
-      },
-      getMessage({ comment, permissions }) {
-        const { message } = comment;
-
-        return this.$ability.can('see-comment-permissions', 'thread')
-          ? `${message} (${permissions.name})`
-          : `${message}`;
+      getActorName({ author }) {
+        return `${author.firstName} ${author.lastName}`;
       }
     }
   };

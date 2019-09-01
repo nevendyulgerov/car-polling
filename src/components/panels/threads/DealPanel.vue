@@ -80,8 +80,6 @@
   import deniedActions from '../../../config/threads/actions/denied';
   import ScrollToDropdown from '../../dropdowns/ScrollTo';
 
-  // TODO: Translate component
-
   export default {
     components: {
       Duplicates,

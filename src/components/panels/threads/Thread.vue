@@ -110,8 +110,6 @@
   import { isStr, isObj } from '../../../utils';
   import placeholder from '../../../assets/images/placeholder.png';
 
-  // TODO: Translate component
-
   export default {
     components: {
       CommentsList,

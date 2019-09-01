@@ -95,8 +95,6 @@
 <script>
   import { extractNestedProp } from '../../utils';
 
-  // TODO: Translate component
-
   export default {
     props: {
       columns: {

@@ -72,8 +72,6 @@
 <script>
   import { isNum, isStr, isObj } from '../../../utils';
 
-  // TODO: Translate component
-
   export default {
     props: {
       thread: {

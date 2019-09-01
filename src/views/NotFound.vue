@@ -28,7 +28,6 @@
 </template>
 
 <script>
-  // TODO: Translate component
   export default {
     computed: {
       isLogged() {

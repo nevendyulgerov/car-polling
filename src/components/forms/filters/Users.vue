@@ -22,8 +22,6 @@
   import stringEscape from 'js-string-escape';
   import FiltersForm from './Filters';
 
-  // TODO: Translate component
-
   export default {
     components: {
       FiltersForm

@@ -76,8 +76,6 @@
   import menuItems from '../config/components/userMenu';
   import { isStr } from '../utils';
 
-  // TODO: Translate component
-
   export default {
     data() {
       return {

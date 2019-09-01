@@ -18,8 +18,6 @@
 <script>
   import { isNum, isObj } from '../../../utils';
 
-  // TODO: Translate component
-
   export default {
     props: {
       thread: {

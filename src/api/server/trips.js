@@ -174,5 +174,19 @@ export default {
         Authorization: `Bearer ${getToken()}`
       }
     });
+  },
+  addTripComment({ tripId, comment }) {
+    const data = {
+      comment
+    };
+
+    return axios({
+      method: 'post',
+      url: `${apiUrl}/trips/${tripId}/comments`,
+      data,
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    });
   }
 };

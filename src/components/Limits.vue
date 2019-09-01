@@ -33,8 +33,6 @@
   import colors from 'vuetify/es5/util/colors';
   import { isObj } from '../utils';
 
-  // TODO: Translate component
-
   export default {
     props: {
       title: {

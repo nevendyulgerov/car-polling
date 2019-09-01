@@ -53,8 +53,6 @@
 </template>
 
 <script>
-  // TODO: Translate component
-
   export default {
     props: {
       deals: {

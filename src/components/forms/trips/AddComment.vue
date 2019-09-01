@@ -41,10 +41,12 @@
 <script>
   import { isObj } from '../../../utils';
 
-  // TODO: Translate component
-
   export default {
     props: {
+      trip: {
+        type: Object,
+        required: true
+      },
       isLoading: {
         type: Boolean,
         default: false
@@ -60,7 +62,6 @@
     },
     data: () => ({
       comment: '',
-      comments: [],
       editorConfig: {
         placeholder: 'Type comment here...',
         btns: [
