@@ -1,4 +1,10 @@
 export default [{
+  text: 'Username',
+  value: 'username',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
   text: 'First name',
   value: 'firstName',
   isDefault: true,
