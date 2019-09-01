@@ -155,9 +155,13 @@
         this.canEditComments = !this.canEditComments;
       },
       onSubmitComment(comment) {
-        const query = {
+        const nextComment = {
           message: comment,
           author: this.loggedUser
+        };
+        const query = {
+          tripId: this.trip.id,
+          comment: nextComment
         };
 
         this.isPostingComment = true;
@@ -165,7 +169,7 @@
           .then((res) => {
             this.trip.comments = [
               ...this.trip.comments,
-              query
+              nextComment
             ];
 
             this.isPostingComment = false;
