@@ -198,7 +198,7 @@ export default {
   ratePassenger({ tripId, passengerId, rating }) {
     return axios({
       method: 'post',
-      url: `${apiUrl}/trips/${tripId}/passenger/${passengerId}/rate/${rating}`,
+      url: `${apiUrl}/trips/${tripId}/passengers/${passengerId}/rate/${rating}`,
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
