@@ -146,6 +146,7 @@
     &[data-component="add-comment"] {
       background-color: $colors.shades.white;
       padding: 16px;
+      margin-top: 24px;
       border-radius: 2px;
 
       .form-actions {

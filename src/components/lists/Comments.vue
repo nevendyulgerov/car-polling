@@ -66,6 +66,8 @@
 
   [data-component-group="lists"] {
     &[data-component="comments"] {
+      margin-top: 24px;
+
       .spinner {
         width: 100%;
         height: 80px;
