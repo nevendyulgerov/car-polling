@@ -16,6 +16,7 @@
     <v-btn
       color="primary"
       class="trigger elevation-4"
+      :disabled="rating === ''"
       @click="submit"
     >
       <v-icon>
