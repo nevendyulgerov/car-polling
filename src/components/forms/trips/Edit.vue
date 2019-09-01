@@ -77,7 +77,7 @@
   import TripStatus from './TripStatus';
   import AddComment from './AddComment';
   import Comments from '../../lists/Comments';
-  import { isObj } from '../../../utils';
+  import { isObj, isArr } from '../../../utils';
 
   export default {
     components: {
@@ -124,6 +124,11 @@
       },
       isTripPassenger() {
         const { trip, loggedUser } = this;
+
+        if (!isObj(trip) || !isArr(trip.passengersList)) {
+          return false;
+        }
+
         const passengerIds = trip.passengersList.map(({ id }) => id);
 
         return passengerIds.indexOf(loggedUser.id) > -1;
