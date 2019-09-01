@@ -127,14 +127,10 @@
 <script>
   import { validationMixin } from 'vuelidate';
   import { required } from 'vuelidate/lib/validators';
-  import Passenger from '../../panels/users/Passenger';
   import dateFormat from '../../../config/dateFormat';
-  import { isObj, isNum } from '../../../utils';
+  import { isObj } from '../../../utils';
 
   export default {
-    components: {
-      Passenger
-    },
     mixins: [validationMixin],
     validations() {
       return {
