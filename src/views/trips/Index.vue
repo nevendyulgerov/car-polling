@@ -50,10 +50,12 @@
             <div v-if="scope.cell.column.value === 'driver'">
               {{ `${scope.cell.item.driver.firstName} ${scope.cell.item.driver.lastName}` }}
 
-              <Rate
-                v-if="canRateDriver(scope.cell.item)"
-                :on-rate="(rating) => onRateDriver(rating, scope.cell.item)"
-              />
+              <div @click="preventDefault">
+                <Rate
+                  v-if="canRateDriver(scope.cell.item)"
+                  :on-rate="(rating) => onRateDriver(rating, scope.cell.item)"
+                />
+              </div>
             </div>
             <div v-else-if="isFlag(scope.cell.column.value)">
               <v-icon
@@ -355,6 +357,10 @@
         return status === 'done'
           && driver.id !== loggedUser.id
           && passengerIds.indexOf(loggedUser.id) > -1;
+      },
+      preventDefault(event) {
+        event.preventDefault();
+        event.stopPropagation();
       }
     },
     metaInfo() {
