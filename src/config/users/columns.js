@@ -23,8 +23,14 @@ export default [{
   isSelected: true,
   isRequired: true
 }, {
-  text: 'Rating',
-  value: 'rating',
+  text: 'Rating as driver',
+  value: 'ratingAsDriver',
+  isDefault: true,
+  isSelected: true,
+  isRequired: true
+}, {
+  text: 'Rating as passenger',
+  value: 'ratingAsPassenger',
   isDefault: true,
   isSelected: true,
   isRequired: true
