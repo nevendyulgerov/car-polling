@@ -61,6 +61,7 @@
 
   [data-component-group="trips-form"] {
     &[data-component="rate"] {
+      padding: 8px;
     }
   }
 </style>
