@@ -99,8 +99,7 @@
         this.onCancel();
       },
       validate() {
-        this.$v.$touch();
-        return this.canSubmitRequest() && !this.$v.error && !this.$v.pending;
+        return this.canSubmitRequest();
       },
       submit() {
         if (!this.validate()) {
@@ -110,7 +109,6 @@
         this.addComment();
       },
       clear() {
-        this.$v.$reset();
         this.comment = '';
         this.isSubmitted = false;
       },
