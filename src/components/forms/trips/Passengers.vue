@@ -20,7 +20,9 @@
           :username="passenger.username"
           :status="passenger.status"
           :is-disabled="isDisabled"
+          :can-rate="canRatePassenger"
           :on-change-status="(status) => onChangePassengerStatus(passenger, status)"
+          :on-rate="(rating) => onRatePassenger(passenger, rating)"
         />
       </template>
     </div>
@@ -47,7 +49,8 @@
     },
     data() {
       return {
-        isLoading: false
+        isLoading: false,
+        isRatingPassenger: false
       };
     },
     computed: {
@@ -57,6 +60,10 @@
       hasTrip() {
         const { trip } = this;
         return isObj(trip) && isNum(trip.id);
+      },
+      canRatePassenger() {
+        const { trip, loggedUser } = this;
+        return this.hasTrip && trip.driver.id === loggedUser.id;
       }
     },
     methods: {
@@ -75,6 +82,24 @@
           })
           .catch((err) => {
             this.isLoading = false;
+            return err;
+          });
+      },
+      onRatePassenger(passenger, rating) {
+        const query = {
+          tripId: this.trip.id,
+          passengerId: passenger.id,
+          rating,
+        };
+
+        this.isRatingPassenger = true;
+        return this.$store.dispatch('trips/ratePassenger', query)
+          .then((res) => {
+            this.isRatingPassenger = false;
+            return res;
+          })
+          .catch((err) => {
+            this.isRatingPassenger = false;
             return err;
           });
       }

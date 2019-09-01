@@ -23,11 +23,21 @@
         @change="onChangeStatus"
       />
     </div>
+
+    <Rate
+      v-if="canRate"
+      :on-rate="onRate"
+    />
   </div>
 </template>
 
 <script>
+  import Rate from '../../forms/trips/Rate';
+
   export default {
+    components: {
+      Rate
+    },
     props: {
       username: {
         type: String,
@@ -41,7 +51,15 @@
         type: Boolean,
         default: false
       },
+      canRate: {
+        type: Boolean,
+        default: false
+      },
       onChangeStatus: {
+        type: Function,
+        required: true
+      },
+      onRate: {
         type: Function,
         required: true
       }
