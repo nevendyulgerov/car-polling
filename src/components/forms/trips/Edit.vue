@@ -48,6 +48,20 @@
         />
       </template>
     </TripStatus>
+
+    <AddComment :on-submit="onSubmitComment">
+      <template slot="beforeForm">
+        <layout-section-header
+          title="Comments"
+          :trigger-label="canEditComments ? 'Close' : 'Edit'"
+          :has-trigger="isTripDriver"
+          @toggle="toggleEditComments"
+        />
+      </template>
+      <template slot="afterForm">
+        <Comments :comments="trip.comments" />
+      </template>
+    </AddComment>
   </div>
 </template>
 
@@ -55,13 +69,17 @@
   import TripForm from './AddNew';
   import Passengers from './Passengers';
   import TripStatus from './TripStatus';
+  import AddComment from './AddComment';
+  import Comments from '../../lists/Comments';
   import { isObj } from '../../../utils';
 
   export default {
     components: {
       TripForm,
       Passengers,
-      TripStatus
+      TripStatus,
+      AddComment,
+      Comments
     },
     props: {
       trip: {
@@ -85,7 +103,8 @@
       return {
         canEditTrip: false,
         canEditPassengers: false,
-        canEditTripStatus: false
+        canEditTripStatus: false,
+        canEditComments: false
       };
     },
     computed: {
@@ -113,6 +132,12 @@
       },
       toggleEditTripStatus() {
         this.canEditTripStatus = !this.canEditTripStatus;
+      },
+      toggleEditComments() {
+        this.canEditComments = !this.canEditComments;
+      },
+      onSubmitComment(comment) {
+
       }
     }
   };
