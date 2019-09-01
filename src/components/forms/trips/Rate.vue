@@ -62,6 +62,7 @@
   [data-component-group="trips-form"] {
     &[data-component="rate"] {
       padding: 8px;
+      background-color: $colors.shades.white;
     }
   }
 </style>
