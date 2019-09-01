@@ -63,7 +63,9 @@
       },
       canRatePassenger() {
         const { trip, loggedUser } = this;
-        return this.hasTrip && trip.driver.id === loggedUser.id;
+        return this.hasTrip
+          && trip.status === 'done'
+          && trip.driver.id === loggedUser.id;
       }
     },
     methods: {
