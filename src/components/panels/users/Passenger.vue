@@ -2,6 +2,7 @@
   <div
     data-component-group="user-panels"
     data-component="passenger"
+    class="elevation-4"
   >
     <div
       class="passenger-username"
@@ -81,8 +82,7 @@
       padding: 12px;
       border-radius: 4px;
       margin: 0 12px 12px 0;
-      color: $colors.shades.white;
-      background-color: $colors.secondary;
+      background-color: $colors.grey.lighten-2;
 
       .passenger-status {
         .v-input {
