@@ -11,17 +11,16 @@
       min="1"
       max="5"
       step="1"
+      :hint="false"
     />
 
     <v-btn
       color="primary"
       class="trigger elevation-4"
-      :disabled="rating === ''"
+      small
+      :disabled="!hasRating"
       @click="submit"
     >
-      <v-icon>
-        star_rate
-      </v-icon>
       {{ 'Rate' }}
     </v-btn>
   </div>
@@ -44,6 +43,11 @@
         rating: ''
       };
     },
+    computed: {
+      hasRating() {
+        return this.rating !== '';
+      }
+    },
     methods: {
       submit() {
         return this.onRate(this.rating)
@@ -61,8 +65,21 @@
 
   [data-component-group="trips-form"] {
     &[data-component="rate"] {
-      padding: 8px;
+      width: 100px;
+      padding: 6px;
+      text-align: center;
+      border-radius: 4px;
       background-color: $colors.shades.white;
+
+      .v-input {
+        margin: 0;
+        padding-top: 8px;
+      }
+
+      .v-btn {
+        width: 100%;
+        margin: -8px 0 0 0;
+      }
     }
   }
 </style>
