@@ -48,7 +48,7 @@
             slot-scope="scope"
           >
             <div v-if="scope.cell.column.value === 'driver'">
-              {{ `${scope.cell.item.driver.firstName} ${scope.cell.item.driver.lastName}` }}
+              {{ scope.cell.item.driver.username }}
 
               <div @click="preventDefault">
                 <Rate
