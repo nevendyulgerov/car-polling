@@ -40,10 +40,4 @@ export default [{
   isDefault: true,
   isSelected: true,
   isRequired: true
-}, {
-  text: 'Avatar',
-  value: 'avatarUri',
-  isDefault: true,
-  isSelected: true,
-  isRequired: true
 }];
