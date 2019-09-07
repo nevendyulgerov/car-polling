@@ -82,7 +82,7 @@
       border-radius: 4px;
       margin: 0 12px 12px 0;
       color: $colors.shades.white;
-      background-color: $colors.primary;
+      background-color: $colors.secondary;
 
       .passenger-status {
         .v-input {

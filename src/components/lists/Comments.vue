@@ -29,7 +29,7 @@
             <span
               class="comment"
               v-html="comment.message"
-            ></span>
+            />
           </div>
         </v-list-tile>
       </template>
