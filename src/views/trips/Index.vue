@@ -50,7 +50,10 @@
             <div v-if="scope.cell.column.value === 'driver'">
               {{ scope.cell.item.driver.username }}
 
-              <div @click="preventDefault">
+              <div
+                class="rate-box"
+                @click="preventDefault"
+              >
                 <Rate
                   v-if="canRateDriver(scope.cell.item)"
                   :on-rate="(rating) => onRateDriver(rating, scope.cell.item)"
@@ -375,6 +378,10 @@
   [data-view="trips"] {
     .view-wrapper {
       padding: 32px 0 0 0;
+    }
+
+    .rate-box {
+      margin: 6px 0 0 0;
     }
 
     [data-component="table"] {
